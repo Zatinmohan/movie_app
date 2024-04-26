@@ -33,7 +33,6 @@ class CustomCircularProgressIndicator extends CustomPainter {
     Offset center = Offset(size.width / 2, size.height / 2);
     double radius = size.width / 2;
 
-
     // for painting circle
     canvas.drawArc(
       Rect.fromCircle(center: center, radius: radius),
@@ -43,12 +42,11 @@ class CustomCircularProgressIndicator extends CustomPainter {
       circlePainter,
     );
 
-
-    // for painting arc 
+    // for painting arc
     canvas.drawArc(
-      Rect.fromCircle(center: center, radius: radius),
-      percentage,
-      math.pi / 4,
+      Rect.fromCircle(center: center, radius: radius - 2),
+      (2 * math.pi),
+      2 * math.pi * percentage,
       false,
       arcPainter,
     );

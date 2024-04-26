@@ -24,11 +24,11 @@ class _SplashPageState extends State<SplashPage> with TickerProviderStateMixin {
   void _initAnimationControllers() {
     _animationController = AnimationController(
       vsync: this,
-      duration: const Duration(seconds: 4),
+      duration: const Duration(seconds: 2),
     )..repeat();
     _animation = Tween<double>(
       begin: 0,
-      end: 2 * math.pi,
+      end: 1.0,
     ).animate(_animationController)
       ..addListener(() {
         setState(() {});
@@ -57,7 +57,7 @@ class _SplashPageState extends State<SplashPage> with TickerProviderStateMixin {
                   percentage: _animation.value,
                   outerColor: Colors.black,
                   innerColor: Colors.black,
-                  innerArcWidth: size * 0.02,
+                  innerArcWidth: size * 0.015,
                   outerCircleWidth: size * 0.002,
                 ),
               ),
