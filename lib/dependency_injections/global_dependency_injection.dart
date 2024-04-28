@@ -1,5 +1,6 @@
 import 'package:get_it/get_it.dart';
 import 'package:movie_app/routes/route_dependency_injection.dart';
+import 'package:movie_app/services/api/api_dependency_injection.dart';
 import 'package:movie_app/services/geo_location/location_service_dependency_injection.dart';
 
 class GlobalDependencyInjection {
@@ -8,5 +9,6 @@ class GlobalDependencyInjection {
   GlobalDependencyInjection() {
     RouteServiceDependencyInjection();
     LocationServiceDependencyInjection();
+    ApiServiceDependencyInjection();
   }
 }
