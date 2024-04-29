@@ -26,49 +26,9 @@ class TopPlayingCardWidget extends StatelessWidget {
               aspectRatio: 16 / 8,
               child: ClipRRect(
                 borderRadius: BorderRadius.circular(30.0),
-                child: Stack(
-                  children: [
-                    Positioned.fill(
-                      child: Image.network(
-                        'https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fimages.hdqwalls.com%2Fwallpapers%2Fgodzilla-vs-king-kong-6f.jpg&f=1&nofb=1&ipt=ffa04b025fab87777242b371d2db2d896b0fcb6f757f8aaebb0903fb3e2b83ae&ipo=images',
-                        fit: BoxFit.cover,
-                      ),
-                    ),
-                    Container(
-                      padding: const EdgeInsets.all(10.0),
-                      alignment: Alignment.bottomLeft,
-                      child: Container(
-                        alignment: Alignment.center,
-                        width: size * 0.12,
-                        height: size * 0.12,
-                        decoration: BoxDecoration(
-                          shape: BoxShape.circle,
-                          color: Colors.blueGrey[600],
-                        ),
-                        child: Column(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            Icon(
-                              Icons.remove_red_eye_outlined,
-                              size: size * 0.05,
-                              color: ColorConstants.kSecondaryAccentColor,
-                            ),
-                            Text(
-                              "7K",
-                              style: Theme.of(context)
-                                  .textTheme
-                                  .bodySmall
-                                  ?.copyWith(
-                                    fontSize: size * 0.03,
-                                    color: ColorConstants.kSecondaryAccentColor,
-                                    fontWeight: FontWeight.w500,
-                                  ),
-                            ),
-                          ],
-                        ),
-                      ),
-                    ),
-                  ],
+                child: const MoviePosterWidget(
+                  imageUrl: "",
+                  viewCount: "7k",
                 ),
               ),
             ),
@@ -120,42 +80,13 @@ class TopPlayingCardWidget extends StatelessWidget {
                         ],
                       ),
                     ),
-                    Expanded(
+                    const Expanded(
                       flex: 2,
                       child: Padding(
-                        padding: const EdgeInsets.symmetric(horizontal: 6.0),
-                        child: Row(
-                          children: [
-                            Text(
-                              "6.7K Votes",
-                              style: Theme.of(context)
-                                  .textTheme
-                                  .bodySmall
-                                  ?.copyWith(
-                                    fontWeight: FontWeight.w500,
-                                    color: ColorConstants
-                                        .kPrimarySubtitleTextColor,
-                                    fontSize: size * 0.048,
-                                  ),
-                            ),
-                            VerticalDivider(
-                              thickness: 1.2,
-                              indent: size * 0.015,
-                              endIndent: size * 0.015,
-                            ),
-                            Text(
-                              "6.67 ⭐",
-                              style: Theme.of(context)
-                                  .textTheme
-                                  .bodySmall
-                                  ?.copyWith(
-                                    fontWeight: FontWeight.w500,
-                                    color: ColorConstants
-                                        .kPrimarySubtitleTextColor,
-                                    fontSize: size * 0.048,
-                                  ),
-                            ),
-                          ],
+                        padding: EdgeInsets.symmetric(horizontal: 6.0),
+                        child: VotingRatingWidget(
+                          voteCount: "6.7K",
+                          rating: "6.67",
                         ),
                       ),
                     ),

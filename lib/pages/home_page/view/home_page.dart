@@ -21,6 +21,8 @@ part 'widgets/now_playing_card/movie_detail_widget.dart';
 part 'widgets/now_playing_card/movie_rating_widget.dart';
 
 part 'widgets/top_playing_card/top_playing_card_widget.dart';
+part 'widgets/top_playing_card/movie_poster_widget.dart';
+part 'widgets/top_playing_card/movie_rating_vote_widget.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({super.key});
