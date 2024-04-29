@@ -1,7 +1,11 @@
 part of '../../home_page.dart';
 
 class TopPlayingCardWidget extends StatelessWidget {
-  const TopPlayingCardWidget({super.key});
+  final TopMoviesResultEntity data;
+  const TopPlayingCardWidget({
+    super.key,
+    required this.data,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -23,12 +27,13 @@ class TopPlayingCardWidget extends StatelessWidget {
         child: Column(
           children: [
             AspectRatio(
-              aspectRatio: 16 / 8,
+              aspectRatio: 16 / 8.5,
               child: ClipRRect(
                 borderRadius: BorderRadius.circular(30.0),
-                child: const MoviePosterWidget(
-                  imageUrl: "",
-                  viewCount: "7k",
+                child: MoviePosterWidget(
+                  imageUrl: data.backdropPath ?? "",
+                  viewCount: Utilities.convertNumbersIntoInternationSystem(
+                      value: data.voteCount ?? 0),
                 ),
               ),
             ),
@@ -40,7 +45,7 @@ class TopPlayingCardWidget extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      "The Dark Knight Rises" * 2,
+                      data.title ?? "",
                       style: Theme.of(context).textTheme.bodySmall?.copyWith(
                             fontWeight: FontWeight.w500,
                             fontSize: size * 0.048,
@@ -49,7 +54,7 @@ class TopPlayingCardWidget extends StatelessWidget {
                       maxLines: 1,
                       overflow: TextOverflow.ellipsis,
                     ),
-                    const SizedBox(height: 4.0),
+                    const SizedBox(height: 2.0),
                     Expanded(
                       flex: 2,
                       child: Row(
@@ -62,8 +67,7 @@ class TopPlayingCardWidget extends StatelessWidget {
                           const SizedBox(width: 8.0),
                           Expanded(
                             child: Text(
-                              "Follwing event where monk fight for his rights and kill gods of godzilla nd the bantne" *
-                                  2,
+                              data.overview ?? "",
                               style: Theme.of(context)
                                   .textTheme
                                   .bodySmall
@@ -80,13 +84,19 @@ class TopPlayingCardWidget extends StatelessWidget {
                         ],
                       ),
                     ),
-                    const Expanded(
+                    Expanded(
                       flex: 2,
                       child: Padding(
-                        padding: EdgeInsets.symmetric(horizontal: 6.0),
+                        padding: const EdgeInsets.symmetric(horizontal: 6.0),
                         child: VotingRatingWidget(
-                          voteCount: "6.7K",
-                          rating: "6.67",
+                          voteCount:
+                              Utilities.convertNumbersIntoInternationSystem(
+                            value: data.voteCount ?? 0,
+                          ),
+                          rating: Utilities.chagneDecimalPlace(
+                            value: data.voteAverage ?? 0,
+                            moveDecimalTo: 2,
+                          ),
                         ),
                       ),
                     ),

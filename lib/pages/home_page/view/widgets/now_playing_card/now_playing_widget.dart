@@ -1,7 +1,11 @@
 part of '../../home_page.dart';
 
 class NowPlayingWidget extends StatefulWidget {
-  const NowPlayingWidget({super.key});
+  final List<NowPlayingResultEntity> data;
+  const NowPlayingWidget({
+    super.key,
+    required this.data,
+  });
 
   @override
   State<NowPlayingWidget> createState() => _NowPlayingWidgetState();
@@ -27,15 +31,21 @@ class _NowPlayingWidgetState extends State<NowPlayingWidget> {
           child: PageView.builder(
             padEnds: false,
             controller: _controller,
-            itemCount: 4,
+            itemCount: widget.data.length,
             itemBuilder: (context, index) {
+              final NowPlayingResultEntity movie = widget.data[index];
               return Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 6.0),
                 child: Stack(
                   children: [
-                    const Align(
+                    Align(
                       alignment: Alignment.topLeft,
-                      child: MovieRatingWidget(ratings: "6.68"),
+                      child: MovieRatingWidget(
+                        ratings: Utilities.chagneDecimalPlace(
+                          value: movie.voteAverage ?? 0.0,
+                          moveDecimalTo: 2,
+                        ),
+                      ),
                     ),
                     Positioned.fill(
                       child: ClipPath(
@@ -58,7 +68,7 @@ class _NowPlayingWidgetState extends State<NowPlayingWidget> {
                             children: [
                               Positioned.fill(
                                 child: Image.network(
-                                  "https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fimages.hdqwalls.com%2Fwallpapers%2Fgodzilla-vs-king-kong-6f.jpg&f=1&nofb=1&ipt=ffa04b025fab87777242b371d2db2d896b0fcb6f757f8aaebb0903fb3e2b83ae&ipo=images",
+                                  "${ApiConstants.kImageBaseUrl}${movie.posterPath ?? ""}",
                                   fit: BoxFit.cover,
                                 ),
                               ),
@@ -69,8 +79,10 @@ class _NowPlayingWidgetState extends State<NowPlayingWidget> {
                                   height: size * 0.14,
                                   padding: const EdgeInsets.symmetric(
                                       horizontal: 8.0),
-                                  child: const CustomCardStatisticsWidget(
-                                    viewCount: "841",
+                                  child: CustomCardStatisticsWidget(
+                                    viewCount: Utilities
+                                        .convertNumbersIntoInternationSystem(
+                                            value: movie.voteCount ?? 0),
                                   ),
                                 ),
                               ),
@@ -93,7 +105,18 @@ class _NowPlayingWidgetState extends State<NowPlayingWidget> {
                                         top: 4.0,
                                         bottom: 12.0,
                                       ),
-                                      child: const MovieDetailWidget(),
+                                      child: MovieDetailWidget(
+                                        movieName: movie.originalTitle ?? "",
+                                        movieDiscription: movie.overview ?? "",
+                                        language: Utilities.getLanguageFromCode(
+                                          langugageCode:
+                                              movie.originalLanguage ?? "",
+                                        ),
+                                        votes: Utilities
+                                            .convertNumbersIntoInternationSystem(
+                                          value: movie.voteCount ?? 0,
+                                        ),
+                                      ),
                                     ),
                                   ),
                                 ),

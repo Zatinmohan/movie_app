@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:intl/intl.dart';
+import 'package:movie_app/utils/language_code.dart';
 
 class Utilities {
   static late Utilities utilities;
@@ -40,6 +41,28 @@ class Utilities {
     currentDate[0] = currentDate[0] + "${dateType}";
     convertedDateTime = currentDate.join(" ");
     return convertedDateTime;
+  }
+
+  static String convertNumbersIntoInternationSystem({required int value}) {
+    if (value >= 0 && value <= 999) {
+      return "$value";
+    } else if (value > 999 && value <= 99999) {
+      return "${value ~/ 1000}K";
+    } else if (value > 99999 && value <= 999999) {
+      return "${value ~/ 1000}K";
+    }
+    return "${value ~/ 1000000}M ";
+  }
+
+  static String chagneDecimalPlace({
+    required double value,
+    required int moveDecimalTo,
+  }) {
+    return value.toStringAsFixed(moveDecimalTo);
+  }
+
+  static String getLanguageFromCode({required String langugageCode}) {
+    return LanguageLocal().isoLangs[langugageCode] ?? "English";
   }
 
   static void hideKeyboard() {

@@ -1,12 +1,23 @@
 part of '../../home_page.dart';
 
 class MovieDetailWidget extends StatelessWidget {
-  const MovieDetailWidget({super.key});
+  final String movieName;
+  final String movieDiscription;
+  final String votes;
+  final String language;
+  const MovieDetailWidget({
+    super.key,
+    required this.movieName,
+    required this.movieDiscription,
+    required this.votes,
+    required this.language,
+  });
 
   @override
   Widget build(BuildContext context) {
     final double size = MediaQuery.sizeOf(context).width;
     return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Flexible(
           child: Align(
@@ -22,7 +33,7 @@ class MovieDetailWidget extends StatelessWidget {
                   ),
                   const SizedBox(width: 8.0),
                   Text(
-                    "English",
+                    language,
                     style: Theme.of(context).textTheme.bodySmall?.copyWith(
                           fontWeight: FontWeight.w400,
                           color: ColorConstants.kSecondaryTextColor,
@@ -36,7 +47,7 @@ class MovieDetailWidget extends StatelessWidget {
         ),
         const SizedBox(height: 6.0),
         Text(
-          "Godzilla X Kong: The New Empirel",
+          movieName,
           style: Theme.of(context).textTheme.bodySmall?.copyWith(
                 fontWeight: FontWeight.w400,
                 color: ColorConstants.kSecondaryTextColor,
@@ -60,7 +71,7 @@ class MovieDetailWidget extends StatelessWidget {
             Expanded(
               flex: 4,
               child: Text(
-                "Following their explosive showdown, Godzilla and Kong must reunitekajsdfkasdkadsj",
+                movieDiscription,
                 style: Theme.of(context).textTheme.bodySmall?.copyWith(
                       fontWeight: FontWeight.w400,
                       color: ColorConstants.kSecondaryTextColor,
@@ -77,7 +88,7 @@ class MovieDetailWidget extends StatelessWidget {
           child: Align(
             alignment: Alignment.bottomLeft,
             child: Text(
-              "716 Votes",
+              "$votes Votes",
               style: Theme.of(context).textTheme.bodySmall?.copyWith(
                     fontWeight: FontWeight.w500,
                     color: ColorConstants.kSecondaryTextColor,

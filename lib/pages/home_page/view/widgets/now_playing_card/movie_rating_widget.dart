@@ -12,9 +12,9 @@ class MovieRatingWidget extends StatelessWidget {
     final double size = MediaQuery.sizeOf(context).width;
     return Container(
       width: size * 0.25,
-      height: size * 0.08,
+      height: size * 0.09,
       // color: Colors.blue,
-      padding: const EdgeInsets.only(top: 6.0, bottom: 6.0, left: 8.0),
+      padding: const EdgeInsets.only(bottom: 10.0, left: 8.0),
       alignment: Alignment.center,
       child: Row(
         mainAxisAlignment: MainAxisAlignment.center,

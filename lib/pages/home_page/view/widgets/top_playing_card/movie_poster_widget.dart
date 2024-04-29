@@ -16,8 +16,8 @@ class MoviePosterWidget extends StatelessWidget {
       children: [
         Positioned.fill(
           child: Image.network(
-            'https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fimages.hdqwalls.com%2Fwallpapers%2Fgodzilla-vs-king-kong-6f.jpg&f=1&nofb=1&ipt=ffa04b025fab87777242b371d2db2d896b0fcb6f757f8aaebb0903fb3e2b83ae&ipo=images',
-            fit: BoxFit.cover,
+            "${ApiConstants.kImageBaseUrl}$imageUrl",
+            fit: BoxFit.fill,
           ),
         ),
         Container(

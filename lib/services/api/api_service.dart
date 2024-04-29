@@ -20,6 +20,7 @@ class ApiService {
         endPoint: endPoint,
         params: params,
         querryParams: queryParams,
+        
       );
       return response;
     } catch (error) {
