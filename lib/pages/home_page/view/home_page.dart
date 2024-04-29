@@ -13,11 +13,14 @@ import 'package:movie_app/utils/utilities.dart';
 part 'widgets/user_location_widget.dart';
 part 'widgets/search_button_widget.dart';
 part 'widgets/we_movie_widget.dart';
+
 part 'widgets/now_playing_card/card_title_widget.dart';
 part 'widgets/now_playing_card/now_playing_widget.dart';
 part 'widgets/now_playing_card/now_playing_statistics_widget.dart';
 part 'widgets/now_playing_card/movie_detail_widget.dart';
 part 'widgets/now_playing_card/movie_rating_widget.dart';
+
+part 'widgets/top_playing_card/top_playing_card_widget.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({super.key});
@@ -71,37 +74,11 @@ class HomePage extends StatelessWidget {
                   ),
                   const SliverToBoxAdapter(child: SizedBox(height: 8.0)),
                   SliverList.builder(itemBuilder: (context, index) {
-                    return Padding(
-                      padding: const EdgeInsets.all(8.0),
+                    return const Padding(
+                      padding: EdgeInsets.all(8.0),
                       child: AspectRatio(
-                        aspectRatio: 16 / 12,
-                        child: Card(
-                          clipBehavior: Clip.antiAlias,
-                          elevation: 2.0,
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(30.0),
-                          ),
-                          child: Padding(
-                            padding: const EdgeInsets.all(10.0),
-                            child: Column(
-                              children: [
-                                AspectRatio(
-                                  aspectRatio: 16 / 9,
-                                  child: Image.network(
-                                    'https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fimages.hdqwalls.com%2Fwallpapers%2Fgodzilla-vs-king-kong-6f.jpg&f=1&nofb=1&ipt=ffa04b025fab87777242b371d2db2d896b0fcb6f757f8aaebb0903fb3e2b83ae&ipo=images',
-                                    fit: BoxFit.fill,
-                                  ),
-                                ),
-                                const SizedBox(height: 6.0),
-                                Expanded(
-                                    flex: 1,
-                                    child: Container(
-                                      color: Colors.blue,
-                                    )),
-                              ],
-                            ),
-                          ),
-                        ),
+                        aspectRatio: 16 / 13.5,
+                        child: TopPlayingCardWidget(),
                       ),
                     );
                   }),

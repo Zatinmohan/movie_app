@@ -34,6 +34,7 @@ class MovieDetailWidget extends StatelessWidget {
             ),
           ),
         ),
+        const SizedBox(height: 6.0),
         Text(
           "Godzilla X Kong: The New Empirel",
           style: Theme.of(context).textTheme.bodySmall?.copyWith(
