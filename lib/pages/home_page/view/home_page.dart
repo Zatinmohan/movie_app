@@ -20,7 +20,7 @@ part 'widgets/user_location_widget.dart';
 part 'widgets/search_button_widget.dart';
 part 'widgets/we_movie_widget.dart';
 
-part 'widgets/now_playing_card/card_title_widget.dart';
+part 'widgets/card_title_widget.dart';
 part 'widgets/now_playing_card/now_playing_widget.dart';
 part 'widgets/now_playing_card/now_playing_statistics_widget.dart';
 part 'widgets/now_playing_card/movie_detail_widget.dart';
@@ -96,7 +96,8 @@ class _HomePageState extends State<HomePage> {
                             ),
                           ),
                           const SliverToBoxAdapter(
-                              child: SizedBox(height: 16.0)),
+                            child: SizedBox(height: 16.0),
+                          ),
                           SliverToBoxAdapter(
                             child: AspectRatio(
                               aspectRatio: 0.9,
