@@ -29,6 +29,12 @@ class _SearchPageState extends State<SearchPage> {
   }
 
   @override
+  void dispose() {
+    searchTextController.dispose();
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     final double size = MediaQuery.sizeOf(context).width;
     return Scaffold(
@@ -80,7 +86,10 @@ class _SearchPageState extends State<SearchPage> {
                         child: Center(child: CircularProgressIndicator()),
                       ),
                       loaded: (data) => Expanded(
-                        child: SearchListWidget(data: data),
+                        child: SearchListWidget(
+                          data: data,
+                          searchedItem: searchTextController.text,
+                        ),
                       ),
                       empty: () => Expanded(
                         child: Container(

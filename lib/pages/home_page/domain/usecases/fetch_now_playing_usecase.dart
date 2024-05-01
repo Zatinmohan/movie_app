@@ -22,7 +22,7 @@ class FetchNowPlayingUsecase {
 
       return result.results ?? [];
     } catch (error) {
-      Logs().errorLog('$error', StackTrace.current);
+      Logs.errorLog('$error', StackTrace.current);
       rethrow;
     }
   }

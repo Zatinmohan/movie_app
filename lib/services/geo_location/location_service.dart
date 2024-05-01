@@ -12,7 +12,7 @@ class GeoLocationService implements LocationServiceRepo<AddressModel> {
 
   GeoLocationService({required GeolocatorPlatform service})
       : _geoLocation = service {
-    Logs().debugLog("$_logName Init", StackTrace.current);
+    Logs.debugLog("$_logName Init", StackTrace.current);
   }
 
   @override
@@ -42,7 +42,7 @@ class GeoLocationService implements LocationServiceRepo<AddressModel> {
               error: LocationErrors.ServiceDisabled)
           .message;
     } catch (error) {
-      Logs().errorLog("$_logName $error", StackTrace.current);
+      Logs.errorLog("$_logName $error", StackTrace.current);
       rethrow;
     }
   }
@@ -71,10 +71,10 @@ class GeoLocationService implements LocationServiceRepo<AddressModel> {
           return true;
       }
     } on LocationServiceExceptions catch (error) {
-      Logs().errorLog("$_logName $error", StackTrace.current);
+      Logs.errorLog("$_logName $error", StackTrace.current);
       throw error.message;
     } catch (error) {
-      Logs().errorLog("$_logName $error", StackTrace.current);
+      Logs.errorLog("$_logName $error", StackTrace.current);
       throw error.toString();
     }
   }
@@ -122,7 +122,7 @@ class GeoLocationService implements LocationServiceRepo<AddressModel> {
         return result;
       }
     } catch (error) {
-      Logs().errorLog("$_logName $error", StackTrace.current);
+      Logs.errorLog("$_logName $error", StackTrace.current);
       rethrow;
     }
   }

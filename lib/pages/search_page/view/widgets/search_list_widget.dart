@@ -1,19 +1,47 @@
 part of '../search_page.dart';
 
-class SearchListWidget extends StatelessWidget {
+class SearchListWidget extends StatefulWidget {
+  final String searchedItem;
   final List<SearchResultEntity> data;
   const SearchListWidget({
     super.key,
+    required this.searchedItem,
     required this.data,
   });
+
+  @override
+  State<SearchListWidget> createState() => _SearchListWidgetState();
+}
+
+class _SearchListWidgetState extends State<SearchListWidget> {
+  late final ScrollController controller;
+  int pageKey = 1;
+  @override
+  void initState() {
+    controller = ScrollController();
+    controller.addListener(() {
+      if (controller.position.pixels >
+          controller.position.maxScrollExtent - 200) {
+        pageKey += 1;
+        context.read<SearchBloc>().add(
+              SearchEvent.fetchFromNextPage(
+                name: widget.searchedItem,
+                pageKey: pageKey,
+              ),
+            );
+      }
+    });
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
     final double size = MediaQuery.sizeOf(context).width;
     return ListView.builder(
-      itemCount: data.length,
+      controller: controller,
+      itemCount: widget.data.length,
       itemBuilder: (context, index) {
-        final SearchResultEntity searchData = data[index];
+        final SearchResultEntity searchData = widget.data[index];
         return AspectRatio(
           aspectRatio: 16 / 9,
           child: Padding(

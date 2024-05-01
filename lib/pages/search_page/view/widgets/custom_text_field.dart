@@ -11,6 +11,7 @@ class CustomSearchFieldWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     final double size = MediaQuery.sizeOf(context).width;
     return TextField(
+      autofocus: true,
       controller: searchController,
       style: Theme.of(context).textTheme.bodySmall?.copyWith(
             fontSize: size * 0.045,

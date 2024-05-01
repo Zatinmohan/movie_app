@@ -8,14 +8,14 @@ class Logs {
 
   factory Logs() => _instance;
 
-  void debugLog(String? message, [StackTrace? stackTrace]) {
+  static void debugLog(String? message, [StackTrace? stackTrace]) {
     _logger.d(
       message,
       stackTrace: stackTrace,
     );
   }
 
-  void errorLog(String? message, [StackTrace? stackTrace, dynamic error]) {
+  static void errorLog(String? message, [StackTrace? stackTrace, dynamic error]) {
     _logger.e(
       message,
       stackTrace: stackTrace,

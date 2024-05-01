@@ -7,7 +7,7 @@ class ApiService {
   final ApiRepository _apiService;
 
   ApiService({required ApiRepository apiService}) : _apiService = apiService {
-    Logs().debugLog("$_logName Init");
+    Logs.debugLog("$_logName Init");
   }
 
   Future<Map<String, dynamic>> getRequest({
@@ -24,7 +24,7 @@ class ApiService {
       );
       return response;
     } catch (error) {
-      Logs().errorLog("$error", StackTrace.current);
+      Logs.errorLog("$error", StackTrace.current);
       rethrow;
     }
   }
@@ -42,7 +42,7 @@ class ApiService {
       );
       return response;
     } catch (error) {
-      Logs().errorLog("$error", StackTrace.current);
+      Logs.errorLog("$error", StackTrace.current);
       rethrow;
     }
   }
@@ -60,7 +60,7 @@ class ApiService {
       );
       return response;
     } catch (error) {
-      Logs().errorLog("$error", StackTrace.current);
+      Logs.errorLog("$error", StackTrace.current);
       rethrow;
     }
   }

@@ -12,7 +12,7 @@ class DioClient implements ApiRepository {
   DioClient({required Dio dio}) : _dio = dio {
     _dio.options.baseUrl = ApiConstants.kBaseUrl;
     _dio.options.connectTimeout = const Duration(seconds: 10);
-    Logs().debugLog("$_logName Init");
+    Logs.debugLog("$_logName Init");
   }
   @override
   Future<Map<String, dynamic>> getRequest(
@@ -20,7 +20,7 @@ class DioClient implements ApiRepository {
       Map<String, dynamic>? params,
       Map<String, dynamic>? querryParams}) async {
     try {
-      Logs().debugLog("Get -> $endPoint");
+      Logs.debugLog("Get -> $endPoint");
       final Response<dynamic> response = await _dio.get(endPoint,
           queryParameters: querryParams,
           options: Options(
@@ -41,7 +41,7 @@ class DioClient implements ApiRepository {
       throw ApiExceptions.fromCode(errorCode: error.response?.statusCode)
           .message;
     } catch (error) {
-      Logs().errorLog("$error", StackTrace.current);
+      Logs.errorLog("$error", StackTrace.current);
       rethrow;
     }
   }
@@ -53,7 +53,7 @@ class DioClient implements ApiRepository {
     Map<String, dynamic>? querryParams,
   }) async {
     try {
-      Logs().debugLog("Post -> $endPoint");
+      Logs.debugLog("Post -> $endPoint");
       final Response<dynamic> response = await _dio.post(
         endPoint,
         queryParameters: querryParams,
@@ -70,7 +70,7 @@ class DioClient implements ApiRepository {
       throw ApiExceptions.fromCode(errorCode: error.response?.statusCode)
           .message;
     } catch (error) {
-      Logs().errorLog("$error", StackTrace.current);
+      Logs.errorLog("$error", StackTrace.current);
       rethrow;
     }
   }
@@ -82,7 +82,7 @@ class DioClient implements ApiRepository {
     Map<String, dynamic>? querryParams,
   }) async {
     try {
-      Logs().debugLog("Put -> $endPoint");
+      Logs.debugLog("Put -> $endPoint");
       final Response<dynamic> response = await _dio.put(
         endPoint,
         queryParameters: querryParams,
@@ -99,7 +99,7 @@ class DioClient implements ApiRepository {
       throw ApiExceptions.fromCode(errorCode: error.response?.statusCode)
           .message;
     } catch (error) {
-      Logs().errorLog("$error", StackTrace.current);
+      Logs.errorLog("$error", StackTrace.current);
       rethrow;
     }
   }

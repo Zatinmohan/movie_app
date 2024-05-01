@@ -8,7 +8,7 @@ class RouteService<T> {
 
   RouteService({required RouteRepo<T> routeService})
       : _routerService = routeService {
-    Logs().debugLog("$_logName Init");
+    Logs.debugLog("$_logName Init");
     _routerService.initilizeRoutes();
   }
 

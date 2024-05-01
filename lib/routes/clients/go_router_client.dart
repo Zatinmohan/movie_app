@@ -16,7 +16,7 @@ class GoRouterClient implements RouteRepo<GoRouter> {
   GoRouterClient({
     required GlobalKey<NavigatorState> navigationKey,
   }) : _navigatorKey = navigationKey {
-    Logs().debugLog("$_logName Init");
+    Logs.debugLog("$_logName Init");
   }
   @override
   void initilizeRoutes() {
