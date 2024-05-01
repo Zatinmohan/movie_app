@@ -2,7 +2,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:movie_app/pages/home_page/domain/entities/now_playing_entities/now_playing_result_entity.dart';
 import 'package:movie_app/pages/home_page/domain/usecases/fetch_now_playing_usecase.dart';
-import 'package:movie_app/services/logger/logger_service.dart';
 
 part 'now_playing_movies_events.dart';
 part 'now_playing_movies_states.dart';

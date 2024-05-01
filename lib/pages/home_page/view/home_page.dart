@@ -17,7 +17,6 @@ import 'package:movie_app/routes/constants/routes_name.dart';
 import 'package:movie_app/services/api/constants/api_constants.dart';
 import 'package:movie_app/services/geo_location/location_service.dart';
 import 'package:movie_app/services/geo_location/models/address_model.dart';
-import 'package:movie_app/services/logger/logger_service.dart';
 import 'package:movie_app/utils/themes/color_constants.dart';
 import 'package:movie_app/utils/utilities.dart';
 
@@ -103,12 +102,14 @@ class _HomePageState extends State<HomePage> {
                         const SliverToBoxAdapter(child: UserLocationWidget()),
                         const SliverToBoxAdapter(child: SizedBox(height: 16.0)),
                         SliverToBoxAdapter(
-                            child: GestureDetector(
-                          onTap: () {
-                            context.pushNamed(RoutesName.SEARCH);
-                          },
-                          child: const SearchButtonWidget(),
-                        )),
+                          child: GestureDetector(
+                            behavior: HitTestBehavior.opaque,
+                            onTap: () {
+                              context.pushNamed(RoutesName.SEARCH);
+                            },
+                            child: const SearchButtonWidget(),
+                          ),
+                        ),
                         const SliverToBoxAdapter(
                           child: SizedBox(height: 16.0),
                         ),

@@ -37,13 +37,14 @@ class GoRouterClient implements RouteRepo<GoRouter> {
               builder: ((context, state) {
                 return const HomePage();
               }),
-              routes: <GoRoute>[
+              routes: [
                 GoRoute(
-                    path: RoutesName.SEARCH,
-                    name: RoutesName.SEARCH,
-                    builder: (context, state) {
-                      return const SearchPage();
-                    }),
+                  path: RoutesName.SEARCH,
+                  name: RoutesName.SEARCH,
+                  builder: (context, state) {
+                    return const SearchPage();
+                  },
+                ),
               ],
             ),
           ],
