@@ -20,11 +20,10 @@ class _SearchListWidgetState extends State<SearchListWidget> {
   void initState() {
     controller = ScrollController();
     controller.addListener(() {
-      if (controller.position.pixels >
-          controller.position.maxScrollExtent - 200) {
+      if (controller.position.pixels >= controller.position.maxScrollExtent) {
         pageKey += 1;
         context.read<SearchBloc>().add(
-              SearchEvent.fetchFromNextPage(
+              SearchEvent.fetchDataFromNextPage(
                 name: widget.searchedItem,
                 pageKey: pageKey,
               ),
@@ -37,100 +36,109 @@ class _SearchListWidgetState extends State<SearchListWidget> {
   @override
   Widget build(BuildContext context) {
     final double size = MediaQuery.sizeOf(context).width;
-    return ListView.builder(
-      controller: controller,
-      itemCount: widget.data.length,
-      itemBuilder: (context, index) {
-        final SearchResultEntity searchData = widget.data[index];
-        return AspectRatio(
-          aspectRatio: 16 / 9,
-          child: Padding(
-            padding: const EdgeInsets.symmetric(
-              horizontal: 4.0,
-              vertical: 8.0,
-            ),
-            child: Card(
-              clipBehavior: Clip.antiAlias,
-              elevation: 4.0,
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(20.0),
-              ),
-              child: Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: Row(
-                  children: [
-                    Expanded(
-                      child: Card(
-                        clipBehavior: Clip.antiAlias,
-                        elevation: 2.0,
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(10.0),
-                        ),
-                        child: Image.network(
-                          "${ApiConstants.kImageBaseUrl}${searchData.posterPath ?? ""}",
-                          fit: BoxFit.cover,
-                        ),
-                      ),
+    return Column(
+      children: [
+        Expanded(
+          child: ListView.builder(
+            controller: controller,
+            itemCount: widget.data.length,
+            itemBuilder: (context, index) {
+              final SearchResultEntity searchData = widget.data[index];
+              return AspectRatio(
+                aspectRatio: 16 / 9,
+                child: Padding(
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: 4.0,
+                    vertical: 8.0,
+                  ),
+                  child: Card(
+                    clipBehavior: Clip.antiAlias,
+                    elevation: 4.0,
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(20.0),
                     ),
-                    const SizedBox(width: 8.0),
-                    Expanded(
-                      flex: 2,
-                      child: Container(
-                        alignment: Alignment.center,
-                        padding: const EdgeInsets.symmetric(
-                          horizontal: 4.0,
-                          vertical: 8.0,
-                        ),
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Text(
-                              searchData.title ?? "",
-                              style: Theme.of(context)
-                                  .textTheme
-                                  .bodySmall
-                                  ?.copyWith(
-                                    fontWeight: FontWeight.w600,
-                                    fontSize: size * 0.045,
-                                  ),
-                              maxLines: 2,
-                              overflow: TextOverflow.ellipsis,
-                            ),
-                            const SizedBox(height: 4.0),
-                            Text(
-                              searchData.overview ?? "",
-                              style: Theme.of(context)
-                                  .textTheme
-                                  .bodySmall
-                                  ?.copyWith(
-                                    fontWeight: FontWeight.w400,
-                                    fontSize: size * 0.035,
-                                  ),
-                              maxLines: 4,
-                              overflow: TextOverflow.ellipsis,
-                            ),
-                            Expanded(
-                              child: Align(
-                                alignment: Alignment.bottomLeft,
-                                child: SearchResultStatistics(
-                                  rating: Utilities.chagneDecimalPlace(
-                                    value: searchData.popularity ?? 0,
-                                    moveDecimalTo: 2,
-                                  ),
-                                ),
+                    child: Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Row(
+                        children: [
+                          Expanded(
+                            child: Card(
+                              clipBehavior: Clip.antiAlias,
+                              elevation: 2.0,
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(10.0),
+                              ),
+                              child: Image.network(
+                                "${ApiConstants.kImageBaseUrl}${searchData.posterPath ?? ""}",
+                                fit: BoxFit.cover,
                               ),
                             ),
-                          ],
-                        ),
+                          ),
+                          const SizedBox(width: 8.0),
+                          Expanded(
+                            flex: 2,
+                            child: Container(
+                              alignment: Alignment.center,
+                              padding: const EdgeInsets.symmetric(
+                                horizontal: 4.0,
+                                vertical: 8.0,
+                              ),
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Text(
+                                    searchData.title ?? "",
+                                    style: Theme.of(context)
+                                        .textTheme
+                                        .bodySmall
+                                        ?.copyWith(
+                                          fontWeight: FontWeight.w600,
+                                          fontSize: size * 0.045,
+                                        ),
+                                    maxLines: 2,
+                                    overflow: TextOverflow.ellipsis,
+                                  ),
+                                  const SizedBox(height: 4.0),
+                                  Text(
+                                    searchData.overview ?? "",
+                                    style: Theme.of(context)
+                                        .textTheme
+                                        .bodySmall
+                                        ?.copyWith(
+                                          fontWeight: FontWeight.w400,
+                                          fontSize: size * 0.035,
+                                        ),
+                                    maxLines: 4,
+                                    overflow: TextOverflow.ellipsis,
+                                  ),
+                                  Expanded(
+                                    child: Align(
+                                      alignment: Alignment.bottomLeft,
+                                      child: SearchResultStatistics(
+                                        rating: Utilities.chagneDecimalPlace(
+                                          value: searchData.popularity ?? 0,
+                                          moveDecimalTo: 2,
+                                        ),
+                                      ),
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ),
+                        ],
                       ),
                     ),
-                  ],
+                  ),
                 ),
-              ),
-            ),
+              );
+            },
           ),
-        );
-      },
+        ),
+        context.watch<SearchBloc>().state == const SearchState.loadingMoreData()
+            ? const Center(child: CircularProgressIndicator())
+            : const SizedBox.shrink(),
+      ],
     );
   }
 }

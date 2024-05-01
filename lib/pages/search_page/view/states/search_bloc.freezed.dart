@@ -20,6 +20,7 @@ mixin _$SearchState {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() loading,
+    required TResult Function() loadingMoreData,
     required TResult Function(List<SearchResultEntity> data) loaded,
     required TResult Function() empty,
     required TResult Function(String error) error,
@@ -29,6 +30,7 @@ mixin _$SearchState {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
     TResult? Function()? loading,
+    TResult? Function()? loadingMoreData,
     TResult? Function(List<SearchResultEntity> data)? loaded,
     TResult? Function()? empty,
     TResult? Function(String error)? error,
@@ -38,6 +40,7 @@ mixin _$SearchState {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
+    TResult Function()? loadingMoreData,
     TResult Function(List<SearchResultEntity> data)? loaded,
     TResult Function()? empty,
     TResult Function(String error)? error,
@@ -48,6 +51,7 @@ mixin _$SearchState {
   TResult map<TResult extends Object?>({
     required TResult Function(_Initial value) initial,
     required TResult Function(_Loading value) loading,
+    required TResult Function(_LoadingMoreMovies value) loadingMoreData,
     required TResult Function(_Loaded value) loaded,
     required TResult Function(_Empty value) empty,
     required TResult Function(_Error value) error,
@@ -57,6 +61,7 @@ mixin _$SearchState {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_Initial value)? initial,
     TResult? Function(_Loading value)? loading,
+    TResult? Function(_LoadingMoreMovies value)? loadingMoreData,
     TResult? Function(_Loaded value)? loaded,
     TResult? Function(_Empty value)? empty,
     TResult? Function(_Error value)? error,
@@ -66,6 +71,7 @@ mixin _$SearchState {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Initial value)? initial,
     TResult Function(_Loading value)? loading,
+    TResult Function(_LoadingMoreMovies value)? loadingMoreData,
     TResult Function(_Loaded value)? loaded,
     TResult Function(_Empty value)? empty,
     TResult Function(_Error value)? error,
@@ -132,6 +138,7 @@ class _$InitialImpl implements _Initial {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() loading,
+    required TResult Function() loadingMoreData,
     required TResult Function(List<SearchResultEntity> data) loaded,
     required TResult Function() empty,
     required TResult Function(String error) error,
@@ -144,6 +151,7 @@ class _$InitialImpl implements _Initial {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
     TResult? Function()? loading,
+    TResult? Function()? loadingMoreData,
     TResult? Function(List<SearchResultEntity> data)? loaded,
     TResult? Function()? empty,
     TResult? Function(String error)? error,
@@ -156,6 +164,7 @@ class _$InitialImpl implements _Initial {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
+    TResult Function()? loadingMoreData,
     TResult Function(List<SearchResultEntity> data)? loaded,
     TResult Function()? empty,
     TResult Function(String error)? error,
@@ -172,6 +181,7 @@ class _$InitialImpl implements _Initial {
   TResult map<TResult extends Object?>({
     required TResult Function(_Initial value) initial,
     required TResult Function(_Loading value) loading,
+    required TResult Function(_LoadingMoreMovies value) loadingMoreData,
     required TResult Function(_Loaded value) loaded,
     required TResult Function(_Empty value) empty,
     required TResult Function(_Error value) error,
@@ -184,6 +194,7 @@ class _$InitialImpl implements _Initial {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_Initial value)? initial,
     TResult? Function(_Loading value)? loading,
+    TResult? Function(_LoadingMoreMovies value)? loadingMoreData,
     TResult? Function(_Loaded value)? loaded,
     TResult? Function(_Empty value)? empty,
     TResult? Function(_Error value)? error,
@@ -196,6 +207,7 @@ class _$InitialImpl implements _Initial {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Initial value)? initial,
     TResult Function(_Loading value)? loading,
+    TResult Function(_LoadingMoreMovies value)? loadingMoreData,
     TResult Function(_Loaded value)? loaded,
     TResult Function(_Empty value)? empty,
     TResult Function(_Error value)? error,
@@ -252,6 +264,7 @@ class _$LoadingImpl implements _Loading {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() loading,
+    required TResult Function() loadingMoreData,
     required TResult Function(List<SearchResultEntity> data) loaded,
     required TResult Function() empty,
     required TResult Function(String error) error,
@@ -264,6 +277,7 @@ class _$LoadingImpl implements _Loading {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
     TResult? Function()? loading,
+    TResult? Function()? loadingMoreData,
     TResult? Function(List<SearchResultEntity> data)? loaded,
     TResult? Function()? empty,
     TResult? Function(String error)? error,
@@ -276,6 +290,7 @@ class _$LoadingImpl implements _Loading {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
+    TResult Function()? loadingMoreData,
     TResult Function(List<SearchResultEntity> data)? loaded,
     TResult Function()? empty,
     TResult Function(String error)? error,
@@ -292,6 +307,7 @@ class _$LoadingImpl implements _Loading {
   TResult map<TResult extends Object?>({
     required TResult Function(_Initial value) initial,
     required TResult Function(_Loading value) loading,
+    required TResult Function(_LoadingMoreMovies value) loadingMoreData,
     required TResult Function(_Loaded value) loaded,
     required TResult Function(_Empty value) empty,
     required TResult Function(_Error value) error,
@@ -304,6 +320,7 @@ class _$LoadingImpl implements _Loading {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_Initial value)? initial,
     TResult? Function(_Loading value)? loading,
+    TResult? Function(_LoadingMoreMovies value)? loadingMoreData,
     TResult? Function(_Loaded value)? loaded,
     TResult? Function(_Empty value)? empty,
     TResult? Function(_Error value)? error,
@@ -316,6 +333,7 @@ class _$LoadingImpl implements _Loading {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Initial value)? initial,
     TResult Function(_Loading value)? loading,
+    TResult Function(_LoadingMoreMovies value)? loadingMoreData,
     TResult Function(_Loaded value)? loaded,
     TResult Function(_Empty value)? empty,
     TResult Function(_Error value)? error,
@@ -330,6 +348,132 @@ class _$LoadingImpl implements _Loading {
 
 abstract class _Loading implements SearchState {
   const factory _Loading() = _$LoadingImpl;
+}
+
+/// @nodoc
+abstract class _$$LoadingMoreMoviesImplCopyWith<$Res> {
+  factory _$$LoadingMoreMoviesImplCopyWith(_$LoadingMoreMoviesImpl value,
+          $Res Function(_$LoadingMoreMoviesImpl) then) =
+      __$$LoadingMoreMoviesImplCopyWithImpl<$Res>;
+}
+
+/// @nodoc
+class __$$LoadingMoreMoviesImplCopyWithImpl<$Res>
+    extends _$SearchStateCopyWithImpl<$Res, _$LoadingMoreMoviesImpl>
+    implements _$$LoadingMoreMoviesImplCopyWith<$Res> {
+  __$$LoadingMoreMoviesImplCopyWithImpl(_$LoadingMoreMoviesImpl _value,
+      $Res Function(_$LoadingMoreMoviesImpl) _then)
+      : super(_value, _then);
+}
+
+/// @nodoc
+
+class _$LoadingMoreMoviesImpl implements _LoadingMoreMovies {
+  const _$LoadingMoreMoviesImpl();
+
+  @override
+  String toString() {
+    return 'SearchState.loadingMoreData()';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType && other is _$LoadingMoreMoviesImpl);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() initial,
+    required TResult Function() loading,
+    required TResult Function() loadingMoreData,
+    required TResult Function(List<SearchResultEntity> data) loaded,
+    required TResult Function() empty,
+    required TResult Function(String error) error,
+  }) {
+    return loadingMoreData();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? initial,
+    TResult? Function()? loading,
+    TResult? Function()? loadingMoreData,
+    TResult? Function(List<SearchResultEntity> data)? loaded,
+    TResult? Function()? empty,
+    TResult? Function(String error)? error,
+  }) {
+    return loadingMoreData?.call();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? initial,
+    TResult Function()? loading,
+    TResult Function()? loadingMoreData,
+    TResult Function(List<SearchResultEntity> data)? loaded,
+    TResult Function()? empty,
+    TResult Function(String error)? error,
+    required TResult orElse(),
+  }) {
+    if (loadingMoreData != null) {
+      return loadingMoreData();
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_Initial value) initial,
+    required TResult Function(_Loading value) loading,
+    required TResult Function(_LoadingMoreMovies value) loadingMoreData,
+    required TResult Function(_Loaded value) loaded,
+    required TResult Function(_Empty value) empty,
+    required TResult Function(_Error value) error,
+  }) {
+    return loadingMoreData(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_Initial value)? initial,
+    TResult? Function(_Loading value)? loading,
+    TResult? Function(_LoadingMoreMovies value)? loadingMoreData,
+    TResult? Function(_Loaded value)? loaded,
+    TResult? Function(_Empty value)? empty,
+    TResult? Function(_Error value)? error,
+  }) {
+    return loadingMoreData?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_Initial value)? initial,
+    TResult Function(_Loading value)? loading,
+    TResult Function(_LoadingMoreMovies value)? loadingMoreData,
+    TResult Function(_Loaded value)? loaded,
+    TResult Function(_Empty value)? empty,
+    TResult Function(_Error value)? error,
+    required TResult orElse(),
+  }) {
+    if (loadingMoreData != null) {
+      return loadingMoreData(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _LoadingMoreMovies implements SearchState {
+  const factory _LoadingMoreMovies() = _$LoadingMoreMoviesImpl;
 }
 
 /// @nodoc
@@ -405,6 +549,7 @@ class _$LoadedImpl implements _Loaded {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() loading,
+    required TResult Function() loadingMoreData,
     required TResult Function(List<SearchResultEntity> data) loaded,
     required TResult Function() empty,
     required TResult Function(String error) error,
@@ -417,6 +562,7 @@ class _$LoadedImpl implements _Loaded {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
     TResult? Function()? loading,
+    TResult? Function()? loadingMoreData,
     TResult? Function(List<SearchResultEntity> data)? loaded,
     TResult? Function()? empty,
     TResult? Function(String error)? error,
@@ -429,6 +575,7 @@ class _$LoadedImpl implements _Loaded {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
+    TResult Function()? loadingMoreData,
     TResult Function(List<SearchResultEntity> data)? loaded,
     TResult Function()? empty,
     TResult Function(String error)? error,
@@ -445,6 +592,7 @@ class _$LoadedImpl implements _Loaded {
   TResult map<TResult extends Object?>({
     required TResult Function(_Initial value) initial,
     required TResult Function(_Loading value) loading,
+    required TResult Function(_LoadingMoreMovies value) loadingMoreData,
     required TResult Function(_Loaded value) loaded,
     required TResult Function(_Empty value) empty,
     required TResult Function(_Error value) error,
@@ -457,6 +605,7 @@ class _$LoadedImpl implements _Loaded {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_Initial value)? initial,
     TResult? Function(_Loading value)? loading,
+    TResult? Function(_LoadingMoreMovies value)? loadingMoreData,
     TResult? Function(_Loaded value)? loaded,
     TResult? Function(_Empty value)? empty,
     TResult? Function(_Error value)? error,
@@ -469,6 +618,7 @@ class _$LoadedImpl implements _Loaded {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Initial value)? initial,
     TResult Function(_Loading value)? loading,
+    TResult Function(_LoadingMoreMovies value)? loadingMoreData,
     TResult Function(_Loaded value)? loaded,
     TResult Function(_Empty value)? empty,
     TResult Function(_Error value)? error,
@@ -531,6 +681,7 @@ class _$EmptyImpl implements _Empty {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() loading,
+    required TResult Function() loadingMoreData,
     required TResult Function(List<SearchResultEntity> data) loaded,
     required TResult Function() empty,
     required TResult Function(String error) error,
@@ -543,6 +694,7 @@ class _$EmptyImpl implements _Empty {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
     TResult? Function()? loading,
+    TResult? Function()? loadingMoreData,
     TResult? Function(List<SearchResultEntity> data)? loaded,
     TResult? Function()? empty,
     TResult? Function(String error)? error,
@@ -555,6 +707,7 @@ class _$EmptyImpl implements _Empty {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
+    TResult Function()? loadingMoreData,
     TResult Function(List<SearchResultEntity> data)? loaded,
     TResult Function()? empty,
     TResult Function(String error)? error,
@@ -571,6 +724,7 @@ class _$EmptyImpl implements _Empty {
   TResult map<TResult extends Object?>({
     required TResult Function(_Initial value) initial,
     required TResult Function(_Loading value) loading,
+    required TResult Function(_LoadingMoreMovies value) loadingMoreData,
     required TResult Function(_Loaded value) loaded,
     required TResult Function(_Empty value) empty,
     required TResult Function(_Error value) error,
@@ -583,6 +737,7 @@ class _$EmptyImpl implements _Empty {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_Initial value)? initial,
     TResult? Function(_Loading value)? loading,
+    TResult? Function(_LoadingMoreMovies value)? loadingMoreData,
     TResult? Function(_Loaded value)? loaded,
     TResult? Function(_Empty value)? empty,
     TResult? Function(_Error value)? error,
@@ -595,6 +750,7 @@ class _$EmptyImpl implements _Empty {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Initial value)? initial,
     TResult Function(_Loading value)? loading,
+    TResult Function(_LoadingMoreMovies value)? loadingMoreData,
     TResult Function(_Loaded value)? loaded,
     TResult Function(_Empty value)? empty,
     TResult Function(_Error value)? error,
@@ -677,6 +833,7 @@ class _$ErrorImpl implements _Error {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() loading,
+    required TResult Function() loadingMoreData,
     required TResult Function(List<SearchResultEntity> data) loaded,
     required TResult Function() empty,
     required TResult Function(String error) error,
@@ -689,6 +846,7 @@ class _$ErrorImpl implements _Error {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
     TResult? Function()? loading,
+    TResult? Function()? loadingMoreData,
     TResult? Function(List<SearchResultEntity> data)? loaded,
     TResult? Function()? empty,
     TResult? Function(String error)? error,
@@ -701,6 +859,7 @@ class _$ErrorImpl implements _Error {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
+    TResult Function()? loadingMoreData,
     TResult Function(List<SearchResultEntity> data)? loaded,
     TResult Function()? empty,
     TResult Function(String error)? error,
@@ -717,6 +876,7 @@ class _$ErrorImpl implements _Error {
   TResult map<TResult extends Object?>({
     required TResult Function(_Initial value) initial,
     required TResult Function(_Loading value) loading,
+    required TResult Function(_LoadingMoreMovies value) loadingMoreData,
     required TResult Function(_Loaded value) loaded,
     required TResult Function(_Empty value) empty,
     required TResult Function(_Error value) error,
@@ -729,6 +889,7 @@ class _$ErrorImpl implements _Error {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_Initial value)? initial,
     TResult? Function(_Loading value)? loading,
+    TResult? Function(_LoadingMoreMovies value)? loadingMoreData,
     TResult? Function(_Loaded value)? loaded,
     TResult? Function(_Empty value)? empty,
     TResult? Function(_Error value)? error,
@@ -741,6 +902,7 @@ class _$ErrorImpl implements _Error {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Initial value)? initial,
     TResult Function(_Loading value)? loading,
+    TResult Function(_LoadingMoreMovies value)? loadingMoreData,
     TResult Function(_Loaded value)? loaded,
     TResult Function(_Empty value)? empty,
     TResult Function(_Error value)? error,
@@ -769,32 +931,39 @@ mixin _$SearchEvent {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function(String name, int pageKey) fetchData,
+    required TResult Function(String name, int pageKey) fetchDataFromNextPage,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function(String name, int pageKey)? fetchData,
+    TResult? Function(String name, int pageKey)? fetchDataFromNextPage,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(String name, int pageKey)? fetchData,
+    TResult Function(String name, int pageKey)? fetchDataFromNextPage,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(_FetchData value) fetchData,
+    required TResult Function(_FetchDataFromNextPage value)
+        fetchDataFromNextPage,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_FetchData value)? fetchData,
+    TResult? Function(_FetchDataFromNextPage value)? fetchDataFromNextPage,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_FetchData value)? fetchData,
+    TResult Function(_FetchDataFromNextPage value)? fetchDataFromNextPage,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -917,6 +1086,7 @@ class _$FetchDataImpl implements _FetchData {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function(String name, int pageKey) fetchData,
+    required TResult Function(String name, int pageKey) fetchDataFromNextPage,
   }) {
     return fetchData(name, pageKey);
   }
@@ -925,6 +1095,7 @@ class _$FetchDataImpl implements _FetchData {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function(String name, int pageKey)? fetchData,
+    TResult? Function(String name, int pageKey)? fetchDataFromNextPage,
   }) {
     return fetchData?.call(name, pageKey);
   }
@@ -933,6 +1104,7 @@ class _$FetchDataImpl implements _FetchData {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(String name, int pageKey)? fetchData,
+    TResult Function(String name, int pageKey)? fetchDataFromNextPage,
     required TResult orElse(),
   }) {
     if (fetchData != null) {
@@ -945,6 +1117,8 @@ class _$FetchDataImpl implements _FetchData {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(_FetchData value) fetchData,
+    required TResult Function(_FetchDataFromNextPage value)
+        fetchDataFromNextPage,
   }) {
     return fetchData(this);
   }
@@ -953,6 +1127,7 @@ class _$FetchDataImpl implements _FetchData {
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_FetchData value)? fetchData,
+    TResult? Function(_FetchDataFromNextPage value)? fetchDataFromNextPage,
   }) {
     return fetchData?.call(this);
   }
@@ -961,6 +1136,7 @@ class _$FetchDataImpl implements _FetchData {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_FetchData value)? fetchData,
+    TResult Function(_FetchDataFromNextPage value)? fetchDataFromNextPage,
     required TResult orElse(),
   }) {
     if (fetchData != null) {
@@ -983,4 +1159,157 @@ abstract class _FetchData implements SearchEvent {
   @JsonKey(ignore: true)
   _$$FetchDataImplCopyWith<_$FetchDataImpl> get copyWith =>
       throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class _$$FetchDataFromNextPageImplCopyWith<$Res>
+    implements $SearchEventCopyWith<$Res> {
+  factory _$$FetchDataFromNextPageImplCopyWith(
+          _$FetchDataFromNextPageImpl value,
+          $Res Function(_$FetchDataFromNextPageImpl) then) =
+      __$$FetchDataFromNextPageImplCopyWithImpl<$Res>;
+  @override
+  @useResult
+  $Res call({String name, int pageKey});
+}
+
+/// @nodoc
+class __$$FetchDataFromNextPageImplCopyWithImpl<$Res>
+    extends _$SearchEventCopyWithImpl<$Res, _$FetchDataFromNextPageImpl>
+    implements _$$FetchDataFromNextPageImplCopyWith<$Res> {
+  __$$FetchDataFromNextPageImplCopyWithImpl(_$FetchDataFromNextPageImpl _value,
+      $Res Function(_$FetchDataFromNextPageImpl) _then)
+      : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? name = null,
+    Object? pageKey = null,
+  }) {
+    return _then(_$FetchDataFromNextPageImpl(
+      name: null == name
+          ? _value.name
+          : name // ignore: cast_nullable_to_non_nullable
+              as String,
+      pageKey: null == pageKey
+          ? _value.pageKey
+          : pageKey // ignore: cast_nullable_to_non_nullable
+              as int,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$FetchDataFromNextPageImpl implements _FetchDataFromNextPage {
+  const _$FetchDataFromNextPageImpl(
+      {required this.name, required this.pageKey});
+
+  @override
+  final String name;
+  @override
+  final int pageKey;
+
+  @override
+  String toString() {
+    return 'SearchEvent.fetchDataFromNextPage(name: $name, pageKey: $pageKey)';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$FetchDataFromNextPageImpl &&
+            (identical(other.name, name) || other.name == name) &&
+            (identical(other.pageKey, pageKey) || other.pageKey == pageKey));
+  }
+
+  @override
+  int get hashCode => Object.hash(runtimeType, name, pageKey);
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$FetchDataFromNextPageImplCopyWith<_$FetchDataFromNextPageImpl>
+      get copyWith => __$$FetchDataFromNextPageImplCopyWithImpl<
+          _$FetchDataFromNextPageImpl>(this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function(String name, int pageKey) fetchData,
+    required TResult Function(String name, int pageKey) fetchDataFromNextPage,
+  }) {
+    return fetchDataFromNextPage(name, pageKey);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function(String name, int pageKey)? fetchData,
+    TResult? Function(String name, int pageKey)? fetchDataFromNextPage,
+  }) {
+    return fetchDataFromNextPage?.call(name, pageKey);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function(String name, int pageKey)? fetchData,
+    TResult Function(String name, int pageKey)? fetchDataFromNextPage,
+    required TResult orElse(),
+  }) {
+    if (fetchDataFromNextPage != null) {
+      return fetchDataFromNextPage(name, pageKey);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_FetchData value) fetchData,
+    required TResult Function(_FetchDataFromNextPage value)
+        fetchDataFromNextPage,
+  }) {
+    return fetchDataFromNextPage(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_FetchData value)? fetchData,
+    TResult? Function(_FetchDataFromNextPage value)? fetchDataFromNextPage,
+  }) {
+    return fetchDataFromNextPage?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_FetchData value)? fetchData,
+    TResult Function(_FetchDataFromNextPage value)? fetchDataFromNextPage,
+    required TResult orElse(),
+  }) {
+    if (fetchDataFromNextPage != null) {
+      return fetchDataFromNextPage(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _FetchDataFromNextPage implements SearchEvent {
+  const factory _FetchDataFromNextPage(
+      {required final String name,
+      required final int pageKey}) = _$FetchDataFromNextPageImpl;
+
+  @override
+  String get name;
+  @override
+  int get pageKey;
+  @override
+  @JsonKey(ignore: true)
+  _$$FetchDataFromNextPageImplCopyWith<_$FetchDataFromNextPageImpl>
+      get copyWith => throw _privateConstructorUsedError;
 }

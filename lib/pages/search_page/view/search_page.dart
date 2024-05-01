@@ -61,7 +61,10 @@ class _SearchPageState extends State<SearchPage> {
             child: BlocProvider(
               create: (context) => SearchBloc(usecaes: sl()),
               child: BlocBuilder<SearchBloc, SearchState>(
-                  builder: (context, state) {
+                  buildWhen: (previous, current) {
+                return current.maybeMap(
+                    loadingMoreData: (_) => false, orElse: () => true);
+              }, builder: (context, state) {
                 return Column(
                   children: [
                     SizedBox(

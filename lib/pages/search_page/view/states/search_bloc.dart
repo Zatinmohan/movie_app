@@ -10,12 +10,17 @@ part 'search_bloc.freezed.dart';
 class SearchBloc extends Bloc<SearchEvent, SearchState> {
   final FetchSearchResultUsecaes _fetchSearchResultUsecaes;
 
+  List<SearchResultEntity> _overallData = [];
+
   SearchBloc({required FetchSearchResultUsecaes usecaes})
       : _fetchSearchResultUsecaes = usecaes,
         super(const SearchState.initial()) {
     on<SearchEvent>((event, emit) async {
       await event.map(
-          fetchData: (_) async => await _fetchSearchMovies(event, emit));
+        fetchData: (_) async => await _fetchSearchMovies(event, emit),
+        fetchDataFromNextPage: (value) async =>
+            await _fetchMoviesFromNextPage(event, emit),
+      );
     });
   }
 
@@ -24,14 +29,17 @@ class SearchBloc extends Bloc<SearchEvent, SearchState> {
     Emitter<SearchState> emit,
   ) async {
     try {
+      _overallData.clear();
       emit(const SearchState.loading());
+
       List<SearchResultEntity> data =
           await _fetchSearchResultUsecaes.fetchSearchedMovies(
         searchTerm: event.name,
         pageKey: event.pageKey,
       );
 
-      if (data.isEmpty) {
+      _overallData.addAll(data);
+      if (_overallData.isEmpty) {
         emit(const SearchState.empty());
       } else {
         emit(SearchState.loaded(data: data));
@@ -44,5 +52,20 @@ class SearchBloc extends Bloc<SearchEvent, SearchState> {
       );
       rethrow;
     }
+  }
+
+  Future<void> _fetchMoviesFromNextPage(
+    SearchEvent event,
+    Emitter<SearchState> emit,
+  ) async {
+    emit(const SearchState.loadingMoreData());
+    List<SearchResultEntity> data =
+        await _fetchSearchResultUsecaes.fetchSearchedMovies(
+      searchTerm: event.name,
+      pageKey: event.pageKey,
+    );
+
+    _overallData.addAll(data);
+    emit(SearchState.loaded(data: _overallData));
   }
 }

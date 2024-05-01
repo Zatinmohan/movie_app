@@ -6,4 +6,8 @@ class SearchEvent with _$SearchEvent {
     required String name,
     required int pageKey,
   }) = _FetchData;
+    const factory SearchEvent.fetchDataFromNextPage({
+    required String name,
+    required int pageKey,
+  }) = _FetchDataFromNextPage;
 }
