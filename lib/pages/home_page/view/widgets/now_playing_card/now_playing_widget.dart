@@ -2,10 +2,7 @@ part of '../../home_page.dart';
 
 class NowPlayingWidget extends StatefulWidget {
   final List<NowPlayingResultEntity> data;
-  const NowPlayingWidget({
-    super.key,
-    required this.data,
-  });
+  const NowPlayingWidget({super.key, required this.data});
 
   @override
   State<NowPlayingWidget> createState() => _NowPlayingWidgetState();
@@ -13,6 +10,7 @@ class NowPlayingWidget extends StatefulWidget {
 
 class _NowPlayingWidgetState extends State<NowPlayingWidget> {
   late final PageController _controller;
+  int pageKey = 1;
 
   @override
   void initState() {
@@ -23,6 +21,7 @@ class _NowPlayingWidgetState extends State<NowPlayingWidget> {
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.sizeOf(context).width;
+    ValueNotifier<int> currentPage = ValueNotifier(0);
     return Column(
       children: [
         const CardTitleWidget(title: "Now Playing"),
@@ -32,6 +31,18 @@ class _NowPlayingWidgetState extends State<NowPlayingWidget> {
             padEnds: false,
             controller: _controller,
             itemCount: widget.data.length,
+            onPageChanged: (index) {
+              currentPage.value = index;
+              if (index >= widget.data.length - 3) {
+                pageKey += 1;
+                context.read<NowPlayingBloc>().add(
+                      NowPlayingMovieEvents.fetchNowPlayingMovies(
+                        pageKey: pageKey,
+                        previousData: widget.data,
+                      ),
+                    );
+              }
+            },
             itemBuilder: (context, index) {
               final NowPlayingResultEntity movie = widget.data[index];
               return Padding(
@@ -133,10 +144,53 @@ class _NowPlayingWidgetState extends State<NowPlayingWidget> {
           ),
         ),
         const SizedBox(height: 8.0),
-        Container(
-          width: size * 0.5,
+        SizedBox(
+          width: size * 0.15,
           height: size * 0.1,
-          color: Colors.pink,
+          child: ValueListenableBuilder(
+              valueListenable: currentPage,
+              builder: (context, value, child) {
+                return Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Container(
+                      width: size * 0.08,
+                      height: size * 0.05,
+                      decoration: BoxDecoration(
+                        color: Colors.black,
+                        borderRadius: BorderRadius.circular(20.0),
+                      ),
+                      alignment: Alignment.center,
+                      child: Text(
+                        "${value + 1}/${widget.data.length}",
+                        style: Theme.of(context).textTheme.bodySmall?.copyWith(
+                              fontSize: size * 0.025,
+                              color: ColorConstants.kSecondaryTextColor,
+                              fontWeight: FontWeight.w600,
+                            ),
+                      ),
+                    ),
+                    const Spacer(),
+                    Container(
+                      width: size * 0.02,
+                      height: size * 0.02,
+                      decoration: BoxDecoration(
+                        color: Colors.grey,
+                        borderRadius: BorderRadius.circular(20.0),
+                      ),
+                    ),
+                    const Spacer(),
+                    Container(
+                      width: size * 0.02,
+                      height: size * 0.02,
+                      decoration: BoxDecoration(
+                        color: Colors.grey,
+                        borderRadius: BorderRadius.circular(20.0),
+                      ),
+                    ),
+                  ],
+                );
+              }),
         ),
       ],
     );

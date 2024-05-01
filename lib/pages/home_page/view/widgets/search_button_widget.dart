@@ -15,7 +15,6 @@ class SearchButtonWidget extends StatelessWidget {
         borderRadius: BorderRadius.circular(30.0),
       ),
       child: Row(
-        // mainAxisAlignment: MainAxisAlignment.spaceBetween,
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           const Icon(

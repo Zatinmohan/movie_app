@@ -1,69 +1,62 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:movie_app/pages/home_page/domain/entities/now_playing_entities/now_playing_result_entity.dart';
 import 'package:movie_app/pages/home_page/domain/entities/top_movies_entities/top_movies_result_entity.dart';
-import 'package:movie_app/pages/home_page/domain/usecases/fetch_now_playing_usecase.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:movie_app/pages/home_page/domain/usecases/fetch_top_movies_usecase.dart';
+import 'package:movie_app/pages/home_page/states/now_playing_movies_bloc/now_playing_movies_bloc.dart';
+import 'package:movie_app/pages/home_page/states/top_movies_bloc/top_movies_bloc.dart';
 
 part 'home_events.dart';
 part 'home_states.dart';
 part 'home_bloc.freezed.dart';
 
 class HomeBloc extends Bloc<HomeEvents, HomeStates> {
-  final FetchNowPlayingUsecase _fetchNowPlayingUsecase;
-  final FetchTopMoviesUsecase _fetchTopMoviesUsecase;
+  final NowPlayingBloc _nowPlayingBloc;
+  final TopMoviesBloc _topMoviesBloc;
 
-  HomeBloc(this._fetchNowPlayingUsecase, this._fetchTopMoviesUsecase)
-      : super(const HomeStates.initial()) {
+  HomeBloc({
+    required NowPlayingBloc nowPlayingBloc,
+    required TopMoviesBloc moviesBloc,
+  })  : _nowPlayingBloc = nowPlayingBloc,
+        _topMoviesBloc = moviesBloc,
+        super(const HomeStates.initial()) {
     on<HomeEvents>((event, emit) async {
       await event.map(
-        fetchNowPlaying: (event) => _fetchNowPlayingMovies(event, emit),
-        fetchTopMovies: (event) {},
-        fetchHomePageData: (event) => _fetchHomePageData(emit),
+        fetchHomePageData: (event) => _fetchHomePageData(emit, event),
+        nowPlayingMoviesLoaded: (value) {
+          emit(const HomeStates.loaded());
+        },
+        topMoviesLoaded: (value) {
+          emit(const HomeStates.loaded());
+        },
       );
+    });
+    _nowPlayingBloc.stream.listen((nowPlayingBlocState) {
+      nowPlayingBlocState.whenOrNull(loaded: (data) {
+        add(HomeEvents.nowPlayingMoviesLoaded(data: data));
+      });
+    });
+
+    _topMoviesBloc.stream.listen((topMoviesBlocState) {
+      topMoviesBlocState.whenOrNull(loaded: (data) {
+        add(HomeEvents.topMoviesLoaded(data: data));
+      });
     });
   }
 
-  Future<void> _fetchHomePageData(Emitter<HomeStates> emit) async {
+  Future<void> _fetchHomePageData(
+    Emitter<HomeStates> emit,
+    HomeEvents events,
+  ) async {
     try {
       emit(const HomeStates.loading());
-      final List<NowPlayingResultEntity> nowPlaying =
-          await _fetchNowPlayingUsecase.fetchNowPlaying(pageKey: 1);
-
-      final List<TopMoviesResultEntity> topMovies =
-          await _fetchTopMoviesUsecase.getTopMovies(pageKey: 1);
-      emit(
-        HomeStates.homeLoaded(
-            nowPlayingData: nowPlaying, topMoviesData: topMovies),
+      _nowPlayingBloc.add(
+        const NowPlayingMovieEvents.fetchNowPlayingMovies(pageKey: 1),
       );
-    } catch (e) {
-      emit(const HomeStates.error());
-      rethrow;
-    }
-  }
-
-  Future<void> _fetchTopMovies(
-    HomeEvents event,
-    Emitter<HomeStates> emit,
-  ) async {
-    try {
-      emit(const HomeStates.loading());
-    } catch (e) {
-      rethrow;
-    }
-  }
-
-  Future<void> _fetchNowPlayingMovies(
-    HomeEvents event,
-    Emitter<HomeStates> emit,
-  ) async {
-    try {
-      emit(const HomeStates.loading());
-      final List<NowPlayingResultEntity> data =
-          await _fetchNowPlayingUsecase.fetchNowPlaying(pageKey: 1);
-      emit(HomeStates.nowPlayingLoaded(data: data));
-    } catch (e) {
-      emit(const HomeStates.error());
+      _topMoviesBloc.add(const TopMoviesEvents.fetchTopMovies(pageKey: 1));
+    } catch (error) {
+      emit(
+        HomeStates.error(message: error.toString()),
+      );
       rethrow;
     }
   }

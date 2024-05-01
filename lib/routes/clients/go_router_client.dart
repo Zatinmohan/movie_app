@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:movie_app/pages/home_page/view/home_page.dart';
+import 'package:movie_app/pages/search_page/view/search_page.dart';
 import 'package:movie_app/pages/splash_page/view/splash_page.dart';
 import 'package:movie_app/routes/constants/routes_name.dart';
 import 'package:movie_app/routes/repositories/routes_repo.dart';
@@ -31,11 +32,20 @@ class GoRouterClient implements RouteRepo<GoRouter> {
           },
           routes: <GoRoute>[
             GoRoute(
-                path: RoutesName.HOME,
-                name: RoutesName.HOME,
-                builder: ((context, state) {
-                  return const HomePage();
-                })),
+              path: RoutesName.HOME,
+              name: RoutesName.HOME,
+              builder: ((context, state) {
+                return const HomePage();
+              }),
+              routes: <GoRoute>[
+                GoRoute(
+                    path: RoutesName.SEARCH,
+                    name: RoutesName.SEARCH,
+                    builder: (context, state) {
+                      return const SearchPage();
+                    }),
+              ],
+            ),
           ],
         ),
       ],

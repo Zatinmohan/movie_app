@@ -27,10 +27,16 @@ class _SplashPageState extends State<SplashPage> with TickerProviderStateMixin {
     WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
       _initLocationService();
       Future.delayed(const Duration(seconds: 2), () {
-        context.pushNamed(RoutesName.HOME);
+        context.pushReplacementNamed(RoutesName.HOME);
       });
     });
     super.initState();
+  }
+
+  @override
+  void dispose() {
+    _animationController.dispose();
+    super.dispose();
   }
 
   Future<void> _initLocationService() async {

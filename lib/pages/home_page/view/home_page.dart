@@ -3,16 +3,21 @@ import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get_it/get_it.dart';
+import 'package:go_router/go_router.dart';
 import 'package:movie_app/gen/assets.gen.dart';
 import 'package:movie_app/pages/home_page/domain/entities/now_playing_entities/now_playing_result_entity.dart';
 import 'package:movie_app/pages/home_page/domain/entities/top_movies_entities/top_movies_result_entity.dart';
 import 'package:movie_app/pages/home_page/states/home_bloc/home_bloc.dart';
+import 'package:movie_app/pages/home_page/states/now_playing_movies_bloc/now_playing_movies_bloc.dart';
+import 'package:movie_app/pages/home_page/states/top_movies_bloc/top_movies_bloc.dart';
 import 'package:movie_app/pages/home_page/view/widgets/custom_movie_clipper.dart';
 import 'package:movie_app/pages/home_page/view/widgets/now_playing_card/custom_now_playing_clipper.dart';
 import 'package:movie_app/pages/home_page_dependency_injection.dart';
+import 'package:movie_app/routes/constants/routes_name.dart';
 import 'package:movie_app/services/api/constants/api_constants.dart';
 import 'package:movie_app/services/geo_location/location_service.dart';
 import 'package:movie_app/services/geo_location/models/address_model.dart';
+import 'package:movie_app/services/logger/logger_service.dart';
 import 'package:movie_app/utils/themes/color_constants.dart';
 import 'package:movie_app/utils/utilities.dart';
 
@@ -39,9 +44,13 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   final GetIt sl = GetIt.instance;
+  late final ScrollController _controller;
+  int pageKey = 1;
   @override
   void initState() {
     HomePageDependencyInjection();
+    _controller = ScrollController();
+
     super.initState();
   }
 
@@ -49,9 +58,19 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     return MultiBlocProvider(
       providers: [
+        BlocProvider<TopMoviesBloc>(
+          create: (context) => TopMoviesBloc(usecase: sl()),
+        ),
+        BlocProvider<NowPlayingBloc>(
+          create: (context) => NowPlayingBloc(usecase: sl()),
+        ),
         BlocProvider<HomeBloc>(
-          create: (context) =>
-              HomeBloc(sl(), sl())..add(const HomeEvents.fetchHomePageData()),
+          create: (context) => HomeBloc(
+            nowPlayingBloc: context.read<NowPlayingBloc>(),
+            moviesBloc: context.read<TopMoviesBloc>(),
+          )..add(
+              const HomeEvents.fetchHomePageData(),
+            ),
         ),
       ],
       child: BlocBuilder<HomeBloc, HomeStates>(
@@ -77,65 +96,105 @@ class _HomePageState extends State<HomePage> {
                         const Center(child: CircularProgressIndicator()),
                     loading: () =>
                         const Center(child: CircularProgressIndicator()),
-                    homeLoaded: (nowPlaying, topMovies) => NestedScrollView(
-                      headerSliverBuilder: (context, isInnerBoxScrolled) {
-                        return [
-                          const SliverToBoxAdapter(
-                              child: SizedBox(height: 8.0)),
-                          const SliverToBoxAdapter(child: UserLocationWidget()),
-                          const SliverToBoxAdapter(
-                              child: SizedBox(height: 16.0)),
-                          const SliverToBoxAdapter(child: SearchButtonWidget()),
-                          const SliverToBoxAdapter(
-                              child: SizedBox(height: 16.0)),
-                          SliverToBoxAdapter(
-                            child: WeMovieWidget(
-                              title: "We Movies",
-                              subTitle:
-                                  "${nowPlaying.length} Movies are loaded in now playing",
-                            ),
-                          ),
-                          const SliverToBoxAdapter(
-                            child: SizedBox(height: 16.0),
-                          ),
-                          SliverToBoxAdapter(
-                            child: AspectRatio(
-                              aspectRatio: 0.9,
-                              child: NowPlayingWidget(
-                                data: nowPlaying,
-                              ),
-                            ),
-                          ),
-                        ];
-                      },
-                      body: CustomScrollView(
-                        slivers: [
-                          const SliverToBoxAdapter(
-                              child: SizedBox(height: 8.0)),
-                          const SliverToBoxAdapter(
-                            child: CardTitleWidget(title: "Top Rated"),
-                          ),
-                          const SliverToBoxAdapter(
-                              child: SizedBox(height: 8.0)),
-                          SliverList.builder(
-                            itemCount: topMovies.length,
-                            itemBuilder: (context, index) {
-                              final TopMoviesResultEntity movie =
-                                  topMovies[index];
-                              return Padding(
-                                padding:
-                                    const EdgeInsets.symmetric(vertical: 8.0),
-                                child: AspectRatio(
-                                  aspectRatio: 16 / 13.5,
-                                  child: TopPlayingCardWidget(
-                                    data: movie,
-                                  ),
+                    loaded: () => CustomScrollView(
+                      controller: _controller,
+                      slivers: [
+                        const SliverToBoxAdapter(child: SizedBox(height: 8.0)),
+                        const SliverToBoxAdapter(child: UserLocationWidget()),
+                        const SliverToBoxAdapter(child: SizedBox(height: 16.0)),
+                        SliverToBoxAdapter(
+                            child: GestureDetector(
+                          onTap: () {
+                            context.pushNamed(RoutesName.SEARCH);
+                          },
+                          child: const SearchButtonWidget(),
+                        )),
+                        const SliverToBoxAdapter(
+                          child: SizedBox(height: 16.0),
+                        ),
+                        BlocBuilder<NowPlayingBloc, NowPlayingMoviesStates>(
+                          buildWhen: (previous, current) {
+                            return current.maybeMap(
+                              loading: (value) => false,
+                              error: (value) => false,
+                              orElse: () => true,
+                            );
+                          },
+                          builder: (context, state) {
+                            return SliverToBoxAdapter(
+                              child: state.whenOrNull(
+                                initial: () => const SliverToBoxAdapter(
+                                    child: SizedBox.shrink()),
+                                loaded: (data) => Column(
+                                  children: [
+                                    WeMovieWidget(
+                                      title: "We Movies",
+                                      subTitle:
+                                          "${data.length} Movies are loaded in now playing",
+                                    ),
+                                    const SizedBox(height: 16.0),
+                                    AspectRatio(
+                                      aspectRatio: 0.9,
+                                      child: NowPlayingWidget(data: data),
+                                    ),
+                                  ],
                                 ),
-                              );
-                            },
-                          ),
-                        ],
-                      ),
+                              ),
+                            );
+                          },
+                        ),
+                        const SliverToBoxAdapter(child: SizedBox(height: 8.0)),
+                        const SliverToBoxAdapter(
+                          child: CardTitleWidget(title: "Top Rated"),
+                        ),
+                        const SliverToBoxAdapter(child: SizedBox(height: 8.0)),
+                        BlocBuilder<TopMoviesBloc, TopMoviesStates>(
+                          buildWhen: (previous, current) {
+                            return current.maybeMap(
+                              loaded: (_) => false,
+                              error: (_) => false,
+                              orElse: () => true,
+                            );
+                          },
+                          builder: (context, state) {
+                            return state.maybeWhen(
+                              initial: () => const SliverToBoxAdapter(
+                                child: SizedBox.shrink(),
+                              ),
+                              loaded: (data) {
+                                // _controller.addListener(() {
+                                //   var nextPageTrigger = 0.8 *
+                                //       _controller.position.maxScrollExtent;
+                                //   if (_controller.position.pixels >
+                                //       nextPageTrigger) {
+                                //     Logs().debugLog("LAFAFJLKJAFKAJFLALKFLJF");
+                                //   }
+                                // });
+                                return SliverList.builder(
+                                  itemCount: data.length,
+                                  itemBuilder: (context, index) {
+                                    final TopMoviesResultEntity movie =
+                                        data[index];
+                                    return Padding(
+                                      padding: const EdgeInsets.symmetric(
+                                        vertical: 8.0,
+                                      ),
+                                      child: AspectRatio(
+                                        aspectRatio: 16 / 13.5,
+                                        child:
+                                            TopPlayingCardWidget(data: movie),
+                                      ),
+                                    );
+                                  },
+                                );
+                              },
+                              orElse: () => const SliverToBoxAdapter(
+                                child: SizedBox.shrink(),
+                              ),
+                            );
+                          },
+                        )
+                      ],
                     ),
                   ),
                 ),
