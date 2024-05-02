@@ -19,6 +19,7 @@ import 'package:movie_app/services/geo_location/location_service.dart';
 import 'package:movie_app/services/geo_location/models/address_model.dart';
 import 'package:movie_app/utils/themes/color_constants.dart';
 import 'package:movie_app/utils/utilities.dart';
+import 'package:pull_to_refresh_flutter3/pull_to_refresh_flutter3.dart';
 
 part 'widgets/user_location_widget.dart';
 part 'widgets/search_button_widget.dart';
