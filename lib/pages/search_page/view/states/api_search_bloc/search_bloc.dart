@@ -172,4 +172,10 @@ class SearchBloc extends Bloc<SearchEvent, SearchState> {
         searchedTerms.map((e) => e.toSearchEntity()).toList();
     return finalResult;
   }
+
+  @override
+  Future<void> close() {
+    Logs.debugLog("$_logName Disposed");
+    return super.close();
+  }
 }

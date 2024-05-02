@@ -8,10 +8,12 @@ import 'package:movie_app/utils/utilities.dart';
 class SearchListWidget extends StatefulWidget {
   final String searchedItem;
   final List<SearchResultEntity> data;
+  final bool usePagination;
   const SearchListWidget({
     super.key,
     required this.searchedItem,
     required this.data,
+    this.usePagination = true,
   });
 
   @override
@@ -24,17 +26,19 @@ class _SearchListWidgetState extends State<SearchListWidget> {
   @override
   void initState() {
     controller = ScrollController();
-    controller.addListener(() {
-      if (controller.position.pixels >= controller.position.maxScrollExtent) {
-        pageKey += 1;
-        context.read<SearchBloc>().add(
-              SearchEvent.fetchDataFromNextPage(
-                name: widget.searchedItem,
-                pageKey: pageKey,
-              ),
-            );
-      }
-    });
+    if (widget.usePagination) {
+      controller.addListener(() {
+        if (controller.position.pixels >= controller.position.maxScrollExtent) {
+          pageKey += 1;
+          context.read<SearchBloc>().add(
+                SearchEvent.fetchDataFromNextPage(
+                  name: widget.searchedItem,
+                  pageKey: pageKey,
+                ),
+              );
+        }
+      });
+    }
     super.initState();
   }
 

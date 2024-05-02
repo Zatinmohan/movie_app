@@ -158,6 +158,7 @@ class _LocalSearchPageState extends State<LocalSearchPage> {
                           child: SearchListWidget(
                         searchedItem: searchTextController.text,
                         data: data,
+                        usePagination: false,
                       )),
                       empty: () => const Expanded(
                         child: Center(child: Text("Not Found")),
