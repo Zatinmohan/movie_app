@@ -17,7 +17,6 @@ import 'package:movie_app/routes/constants/routes_name.dart';
 import 'package:movie_app/services/api/constants/api_constants.dart';
 import 'package:movie_app/services/geo_location/location_service.dart';
 import 'package:movie_app/services/geo_location/models/address_model.dart';
-import 'package:movie_app/services/logger/logger_service.dart';
 import 'package:movie_app/utils/themes/color_constants.dart';
 import 'package:movie_app/utils/utilities.dart';
 import 'package:pull_to_refresh_flutter3/pull_to_refresh_flutter3.dart';
@@ -25,23 +24,20 @@ import 'package:pull_to_refresh_flutter3/pull_to_refresh_flutter3.dart';
 part 'widgets/user_location_widget.dart';
 part 'widgets/search_button_widget.dart';
 part 'widgets/we_movie_widget.dart';
-
 part 'widgets/section_title_widget.dart';
+part 'widgets/top_movie_widget.dart';
+part 'widgets/home_page_loaded_widget.dart';
+part 'widgets/error_widget.dart';
+
 part 'widgets/now_playing_widget.dart';
 part 'widgets/now_playing_card/now_playing_statistics_widget.dart';
 part 'widgets/now_playing_card/movie_detail_widget.dart';
 part 'widgets/now_playing_card/movie_rating_widget.dart';
+part 'widgets/now_playing_card/custom_dot_indicators.dart';
 
 part 'widgets/top_playing_card/top_playing_card_widget.dart';
 part 'widgets/top_playing_card/movie_poster_widget.dart';
 part 'widgets/top_playing_card/movie_rating_vote_widget.dart';
-
-part 'widgets/top_movie_widget.dart';
-part 'widgets/home_page_loaded_widget.dart';
-
-part 'widgets/now_playing_card/custom_dot_indicators.dart';
-
-part 'widgets/error_widget.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});

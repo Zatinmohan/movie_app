@@ -13,7 +13,6 @@ class _UserLocationWidgetState extends State<UserLocationWidget> {
   @override
   void initState() {
     fetchUserAddress();
-
     super.initState();
   }
 
@@ -41,7 +40,7 @@ class _UserLocationWidgetState extends State<UserLocationWidget> {
                   ),
                   const SizedBox(width: 4.0),
                   Text(
-                    userAddress?.name ?? "",
+                    userAddress?.name ?? "Not Available",
                     style: Theme.of(context).textTheme.bodySmall?.copyWith(
                           fontWeight: FontWeight.w700,
                           fontSize: size * 0.052,
@@ -53,7 +52,7 @@ class _UserLocationWidgetState extends State<UserLocationWidget> {
               Padding(
                 padding: const EdgeInsets.only(left: 9.0),
                 child: Text(
-                  "${userAddress?.city}, ${userAddress?.state}",
+                  "${userAddress?.city ?? "N/A"}, ${userAddress?.state ?? "N/A"}",
                   style: Theme.of(context).textTheme.bodySmall?.copyWith(
                         color: ColorConstants.kSecondarySubtitleTextColor,
                         fontSize: size * 0.038,

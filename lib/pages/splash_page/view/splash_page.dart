@@ -6,6 +6,7 @@ import 'package:movie_app/pages/splash_page/view/widgets/custom_loader.dart';
 import 'package:movie_app/routes/constants/routes_name.dart';
 import 'package:movie_app/services/geo_location/errors/geo_exceptions.dart';
 import 'package:movie_app/services/geo_location/location_service.dart';
+import 'package:movie_app/services/logger/logger_service.dart';
 import 'package:movie_app/utils/themes/color_constants.dart';
 
 import 'package:movie_app/utils/utilities.dart';
@@ -24,11 +25,18 @@ class _SplashPageState extends State<SplashPage> with TickerProviderStateMixin {
   @override
   void initState() {
     _initAnimationControllers();
-    WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
-      _initLocationService();
-      Future.delayed(const Duration(seconds: 2), () {
-        context.pushReplacementNamed(RoutesName.Main);
-      });
+    WidgetsBinding.instance.addPostFrameCallback((timeStamp) async {
+      try {
+        await _initLocationService();
+        Future.delayed(const Duration(seconds: 2), () {
+          context.pushReplacementNamed(RoutesName.Main);
+        });
+      } catch (e) {
+        Logs.errorLog(e.toString(), StackTrace.current);
+        Future.delayed(const Duration(seconds: 2), () {
+          context.pushReplacementNamed(RoutesName.Main);
+        });
+      }
     });
     super.initState();
   }
