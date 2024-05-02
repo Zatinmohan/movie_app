@@ -17,8 +17,17 @@ class _HomeLoadedWidgetState extends State<HomeLoadedWidget> {
     _controller = ScrollController();
     _refreshController = RefreshController(initialRefresh: false);
     _controller.addListener(() {
+      final TopMoviesStates currentState = context.read<TopMoviesBloc>().state;
+
+      final bool shouldLoadMoreData = currentState.maybeMap(
+        loading: (_) => false,
+        loadingMoreMovies: (_) => false,
+        error: (_) => false,
+        orElse: () => true,
+      );
       if (_controller.offset >= _controller.position.maxScrollExtent &&
-          !_controller.position.outOfRange) {
+          !_controller.position.outOfRange &&
+          shouldLoadMoreData) {
         pageKey += 1;
         BlocProvider.of<TopMoviesBloc>(context).add(
           TopMoviesEvents.fetchMoreMovies(pageKey: pageKey),
@@ -35,6 +44,7 @@ class _HomeLoadedWidgetState extends State<HomeLoadedWidget> {
 
   @override
   Widget build(BuildContext context) {
+    final double size = MediaQuery.sizeOf(context).width;
     return SmartRefresher(
       controller: _refreshController,
       onRefresh: _onRefresh,
@@ -66,23 +76,38 @@ class _HomeLoadedWidgetState extends State<HomeLoadedWidget> {
             builder: (context, state) {
               return SliverToBoxAdapter(
                 child: state.whenOrNull(
-                  initial: () =>
-                      const SliverToBoxAdapter(child: SizedBox.shrink()),
-                  loaded: (data) => Column(
-                    children: [
-                      WeMovieWidget(
-                        title: "We Movies",
-                        subTitle:
-                            "${data.length} Movies are loaded in now playing",
-                      ),
-                      const SizedBox(height: 16.0),
-                      AspectRatio(
-                        aspectRatio: 0.9,
-                        child: NowPlayingWidget(data: data),
-                      ),
-                    ],
-                  ),
-                ),
+                    initial: () =>
+                        const SliverToBoxAdapter(child: SizedBox.shrink()),
+                    loading: () => SizedBox(
+                          width: size,
+                          height: size * 0.45,
+                          child: const Center(
+                            child: CircularProgressIndicator(),
+                          ),
+                        ),
+                    loaded: (data) => Column(
+                          children: [
+                            WeMovieWidget(
+                              title: "We Movies",
+                              subTitle:
+                                  "${data.length} Movies are loaded in now playing",
+                            ),
+                            const SizedBox(height: 16.0),
+                            AspectRatio(
+                              aspectRatio: 0.9,
+                              child: NowPlayingWidget(data: data),
+                            ),
+                          ],
+                        ),
+                    error: (errorMessage) => HomePageErrorWidget(
+                          errorMessage: "Error: $errorMessage",
+                          onTap: () {
+                            context.read<NowPlayingBloc>().add(
+                                  const NowPlayingMovieEvents
+                                      .fetchNowPlayingMovies(pageKey: 1),
+                                );
+                          },
+                        )),
               );
             },
           ),
@@ -101,9 +126,30 @@ class _HomeLoadedWidgetState extends State<HomeLoadedWidget> {
                 initial: () => const SliverToBoxAdapter(
                   child: SizedBox.shrink(),
                 ),
+                loading: () => SliverToBoxAdapter(
+                  child: SizedBox(
+                    width: size,
+                    height: size * 0.45,
+                    child: const Center(
+                      child: CircularProgressIndicator(),
+                    ),
+                  ),
+                ),
                 loaded: (data) {
                   return TopMoviesWidget(data: data);
                 },
+                error: (error) => SliverToBoxAdapter(
+                  child: HomePageErrorWidget(
+                    errorMessage: error,
+                    onTap: () {
+                      context.read<TopMoviesBloc>().add(
+                            const TopMoviesEvents.fetchTopMovies(
+                              pageKey: 1,
+                            ),
+                          );
+                    },
+                  ),
+                ),
                 orElse: () => const SliverToBoxAdapter(
                   child: SizedBox.shrink(),
                 ),

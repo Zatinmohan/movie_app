@@ -40,9 +40,11 @@ class NowPlayingBloc
           await _fetchMoviesUsecase.fetchNowPlaying(pageKey: event.pageKey);
 
       _originalList.addAll(data);
+
       emit(NowPlayingMoviesStates.loaded(data: data));
     } catch (error) {
       emit(NowPlayingMoviesStates.error(errorMessage: error.toString()));
+      Logs.errorLog(error.toString(), StackTrace.current);
       rethrow;
     }
   }
@@ -60,6 +62,7 @@ class NowPlayingBloc
 
       emit(NowPlayingMoviesStates.loaded(data: _originalList));
     } catch (error) {
+      Logs.errorLog(error.toString(), StackTrace.current);
       rethrow;
     }
   }

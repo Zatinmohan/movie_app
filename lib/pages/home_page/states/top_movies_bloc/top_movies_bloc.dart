@@ -37,8 +37,10 @@ class TopMoviesBloc extends Bloc<TopMoviesEvents, TopMoviesStates> {
           await _usecase.getTopMovies(pageKey: event.pageKey);
 
       _originalData.addAll(data);
+
       emit(TopMoviesStates.loaded(data: data));
     } catch (error) {
+      Logs.errorLog(error.toString());
       emit(TopMoviesStates.error(error: error.toString()));
       rethrow;
     }
@@ -57,8 +59,8 @@ class TopMoviesBloc extends Bloc<TopMoviesEvents, TopMoviesStates> {
       if (_originalData.isNotEmpty) {
         emit(TopMoviesStates.loaded(data: _originalData));
       }
-    } catch (e) {
-      emit(TopMoviesStates.error(error: e.toString()));
+    } catch (error) {
+      Logs.errorLog(error.toString());
       rethrow;
     }
   }
