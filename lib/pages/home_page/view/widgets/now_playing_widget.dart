@@ -1,4 +1,4 @@
-part of '../../home_page.dart';
+part of '../home_page.dart';
 
 class NowPlayingWidget extends StatefulWidget {
   final List<NowPlayingResultEntity> data;
@@ -24,7 +24,7 @@ class _NowPlayingWidgetState extends State<NowPlayingWidget> {
     ValueNotifier<int> currentPage = ValueNotifier(0);
     return Column(
       children: [
-        const CardTitleWidget(title: "Now Playing"),
+        const SectionTitleWidget(title: "Now Playing"),
         const SizedBox(height: 12.0),
         Expanded(
           child: PageView.builder(

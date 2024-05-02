@@ -2,22 +2,28 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:movie_app/gen/assets.gen.dart';
 import 'package:movie_app/pages/bottom_navigation_page/views/states/bottom_bar_bloc.dart';
+import 'package:movie_app/pages/explore_page/view/explore_page.dart';
 import 'package:movie_app/pages/home_page/view/home_page.dart';
+import 'package:movie_app/pages/upcoming_page/view/upcoming_page.dart';
 
 class MainPage extends StatelessWidget {
   MainPage({super.key});
 
   final List<Widget> pages = [
     const HomePage(),
-    Container(),
-    Container(),
+    const ExplorePage(),
+    const UpComingPage(),
   ];
 
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.sizeOf(context).width;
-    return BlocProvider(
-      create: (context) => BottomTabBloc(),
+    return MultiBlocProvider(
+      providers: [
+        BlocProvider<BottomTabBloc>(
+          create: (context) => BottomTabBloc(),
+        ),
+      ],
       child: BlocConsumer<BottomTabBloc, TabChangeState>(
           listener: (context, state) {},
           builder: (ctx, state) {

@@ -1,8 +1,8 @@
 part of '../home_page.dart';
 
-class CardTitleWidget extends StatelessWidget {
+class SectionTitleWidget extends StatelessWidget {
   final String title;
-  const CardTitleWidget({
+  const SectionTitleWidget({
     super.key,
     required this.title,
   });
