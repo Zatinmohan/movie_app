@@ -4,6 +4,8 @@ part of 'now_playing_movies_bloc.dart';
 class NowPlayingMovieEvents with _$NowPlayingMovieEvents {
   const factory NowPlayingMovieEvents.fetchNowPlayingMovies({
     required int pageKey,
-    List<NowPlayingResultEntity>? previousData,
   }) = _FetchMovies;
+
+  const factory NowPlayingMovieEvents.fetchMoreNowPlayingMovies(
+      {required int pageKey}) = _FetchMoreDat;
 }

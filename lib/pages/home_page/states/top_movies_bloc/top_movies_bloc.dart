@@ -2,17 +2,22 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:movie_app/pages/home_page/domain/entities/top_movies_entities/top_movies_result_entity.dart';
 import 'package:movie_app/pages/home_page/domain/usecases/fetch_top_movies_usecase.dart';
+import 'package:movie_app/services/logger/logger_service.dart';
 
 part 'top_movies_events.dart';
 part 'top_movies_states.dart';
 part 'top_movies_bloc.freezed.dart';
 
+const String _logName = "Top Movies Bloc";
+
 class TopMoviesBloc extends Bloc<TopMoviesEvents, TopMoviesStates> {
   final FetchTopMoviesUsecase _usecase;
   List<TopMoviesResultEntity> _originalData = [];
-  TopMoviesBloc({required FetchTopMoviesUsecase usecase})
-      : _usecase = usecase,
+  TopMoviesBloc({
+    required FetchTopMoviesUsecase usecase,
+  })  : _usecase = usecase,
         super(const TopMoviesStates.initial()) {
+    Logs.debugLog("$_logName Init");
     on<TopMoviesEvents>((event, emit) async {
       await event.map(
         fetchTopMovies: (_) async => await _fetchTopMovies(emit, event),
@@ -56,5 +61,11 @@ class TopMoviesBloc extends Bloc<TopMoviesEvents, TopMoviesStates> {
       emit(TopMoviesStates.error(error: e.toString()));
       rethrow;
     }
+  }
+
+  @override
+  Future<void> close() {
+    Logs.debugLog("$_logName Dispose");
+    return super.close();
   }
 }

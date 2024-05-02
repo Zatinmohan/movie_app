@@ -49,8 +49,7 @@ class _HomeLoadedWidgetState extends State<HomeLoadedWidget> {
         BlocBuilder<NowPlayingBloc, NowPlayingMoviesStates>(
           buildWhen: (previous, current) {
             return current.maybeMap(
-              loading: (value) => false,
-              error: (value) => false,
+              loadingMoreMovies: (_) => false,
               orElse: () => true,
             );
           },

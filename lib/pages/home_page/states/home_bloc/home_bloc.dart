@@ -4,10 +4,13 @@ import 'package:movie_app/pages/home_page/domain/entities/top_movies_entities/to
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:movie_app/pages/home_page/states/now_playing_movies_bloc/now_playing_movies_bloc.dart';
 import 'package:movie_app/pages/home_page/states/top_movies_bloc/top_movies_bloc.dart';
+import 'package:movie_app/services/logger/logger_service.dart';
 
 part 'home_events.dart';
 part 'home_states.dart';
 part 'home_bloc.freezed.dart';
+
+const String _logName = "Home Bloc";
 
 class HomeBloc extends Bloc<HomeEvents, HomeStates> {
   final NowPlayingBloc _nowPlayingBloc;
@@ -19,6 +22,7 @@ class HomeBloc extends Bloc<HomeEvents, HomeStates> {
   })  : _nowPlayingBloc = nowPlayingBloc,
         _topMoviesBloc = moviesBloc,
         super(const HomeStates.initial()) {
+    Logs.debugLog("$_logName Init");
     on<HomeEvents>((event, emit) async {
       await event.map(
         fetchHomePageData: (event) => _fetchHomePageData(emit, event),
@@ -59,5 +63,11 @@ class HomeBloc extends Bloc<HomeEvents, HomeStates> {
       );
       rethrow;
     }
+  }
+
+  @override
+  Future<void> close() {
+    Logs.debugLog("$_logName Disposed");
+    return super.close();
   }
 }

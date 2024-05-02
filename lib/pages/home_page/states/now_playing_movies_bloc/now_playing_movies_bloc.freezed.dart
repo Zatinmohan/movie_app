@@ -17,41 +17,41 @@ final _privateConstructorUsedError = UnsupportedError(
 /// @nodoc
 mixin _$NowPlayingMovieEvents {
   int get pageKey => throw _privateConstructorUsedError;
-  List<NowPlayingResultEntity>? get previousData =>
-      throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(
-            int pageKey, List<NowPlayingResultEntity>? previousData)
-        fetchNowPlayingMovies,
+    required TResult Function(int pageKey) fetchNowPlayingMovies,
+    required TResult Function(int pageKey) fetchMoreNowPlayingMovies,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(int pageKey, List<NowPlayingResultEntity>? previousData)?
-        fetchNowPlayingMovies,
+    TResult? Function(int pageKey)? fetchNowPlayingMovies,
+    TResult? Function(int pageKey)? fetchMoreNowPlayingMovies,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(int pageKey, List<NowPlayingResultEntity>? previousData)?
-        fetchNowPlayingMovies,
+    TResult Function(int pageKey)? fetchNowPlayingMovies,
+    TResult Function(int pageKey)? fetchMoreNowPlayingMovies,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(_FetchMovies value) fetchNowPlayingMovies,
+    required TResult Function(_FetchMoreDat value) fetchMoreNowPlayingMovies,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_FetchMovies value)? fetchNowPlayingMovies,
+    TResult? Function(_FetchMoreDat value)? fetchMoreNowPlayingMovies,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_FetchMovies value)? fetchNowPlayingMovies,
+    TResult Function(_FetchMoreDat value)? fetchMoreNowPlayingMovies,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -67,7 +67,7 @@ abstract class $NowPlayingMovieEventsCopyWith<$Res> {
           $Res Function(NowPlayingMovieEvents) then) =
       _$NowPlayingMovieEventsCopyWithImpl<$Res, NowPlayingMovieEvents>;
   @useResult
-  $Res call({int pageKey, List<NowPlayingResultEntity>? previousData});
+  $Res call({int pageKey});
 }
 
 /// @nodoc
@@ -85,17 +85,12 @@ class _$NowPlayingMovieEventsCopyWithImpl<$Res,
   @override
   $Res call({
     Object? pageKey = null,
-    Object? previousData = freezed,
   }) {
     return _then(_value.copyWith(
       pageKey: null == pageKey
           ? _value.pageKey
           : pageKey // ignore: cast_nullable_to_non_nullable
               as int,
-      previousData: freezed == previousData
-          ? _value.previousData
-          : previousData // ignore: cast_nullable_to_non_nullable
-              as List<NowPlayingResultEntity>?,
     ) as $Val);
   }
 }
@@ -108,7 +103,7 @@ abstract class _$$FetchMoviesImplCopyWith<$Res>
       __$$FetchMoviesImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({int pageKey, List<NowPlayingResultEntity>? previousData});
+  $Res call({int pageKey});
 }
 
 /// @nodoc
@@ -123,17 +118,12 @@ class __$$FetchMoviesImplCopyWithImpl<$Res>
   @override
   $Res call({
     Object? pageKey = null,
-    Object? previousData = freezed,
   }) {
     return _then(_$FetchMoviesImpl(
       pageKey: null == pageKey
           ? _value.pageKey
           : pageKey // ignore: cast_nullable_to_non_nullable
               as int,
-      previousData: freezed == previousData
-          ? _value._previousData
-          : previousData // ignore: cast_nullable_to_non_nullable
-              as List<NowPlayingResultEntity>?,
     ));
   }
 }
@@ -141,25 +131,14 @@ class __$$FetchMoviesImplCopyWithImpl<$Res>
 /// @nodoc
 
 class _$FetchMoviesImpl implements _FetchMovies {
-  const _$FetchMoviesImpl(
-      {required this.pageKey, final List<NowPlayingResultEntity>? previousData})
-      : _previousData = previousData;
+  const _$FetchMoviesImpl({required this.pageKey});
 
   @override
   final int pageKey;
-  final List<NowPlayingResultEntity>? _previousData;
-  @override
-  List<NowPlayingResultEntity>? get previousData {
-    final value = _previousData;
-    if (value == null) return null;
-    if (_previousData is EqualUnmodifiableListView) return _previousData;
-    // ignore: implicit_dynamic_type
-    return EqualUnmodifiableListView(value);
-  }
 
   @override
   String toString() {
-    return 'NowPlayingMovieEvents.fetchNowPlayingMovies(pageKey: $pageKey, previousData: $previousData)';
+    return 'NowPlayingMovieEvents.fetchNowPlayingMovies(pageKey: $pageKey)';
   }
 
   @override
@@ -167,14 +146,11 @@ class _$FetchMoviesImpl implements _FetchMovies {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$FetchMoviesImpl &&
-            (identical(other.pageKey, pageKey) || other.pageKey == pageKey) &&
-            const DeepCollectionEquality()
-                .equals(other._previousData, _previousData));
+            (identical(other.pageKey, pageKey) || other.pageKey == pageKey));
   }
 
   @override
-  int get hashCode => Object.hash(
-      runtimeType, pageKey, const DeepCollectionEquality().hash(_previousData));
+  int get hashCode => Object.hash(runtimeType, pageKey);
 
   @JsonKey(ignore: true)
   @override
@@ -185,31 +161,30 @@ class _$FetchMoviesImpl implements _FetchMovies {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(
-            int pageKey, List<NowPlayingResultEntity>? previousData)
-        fetchNowPlayingMovies,
+    required TResult Function(int pageKey) fetchNowPlayingMovies,
+    required TResult Function(int pageKey) fetchMoreNowPlayingMovies,
   }) {
-    return fetchNowPlayingMovies(pageKey, previousData);
+    return fetchNowPlayingMovies(pageKey);
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(int pageKey, List<NowPlayingResultEntity>? previousData)?
-        fetchNowPlayingMovies,
+    TResult? Function(int pageKey)? fetchNowPlayingMovies,
+    TResult? Function(int pageKey)? fetchMoreNowPlayingMovies,
   }) {
-    return fetchNowPlayingMovies?.call(pageKey, previousData);
+    return fetchNowPlayingMovies?.call(pageKey);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(int pageKey, List<NowPlayingResultEntity>? previousData)?
-        fetchNowPlayingMovies,
+    TResult Function(int pageKey)? fetchNowPlayingMovies,
+    TResult Function(int pageKey)? fetchMoreNowPlayingMovies,
     required TResult orElse(),
   }) {
     if (fetchNowPlayingMovies != null) {
-      return fetchNowPlayingMovies(pageKey, previousData);
+      return fetchNowPlayingMovies(pageKey);
     }
     return orElse();
   }
@@ -218,6 +193,7 @@ class _$FetchMoviesImpl implements _FetchMovies {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(_FetchMovies value) fetchNowPlayingMovies,
+    required TResult Function(_FetchMoreDat value) fetchMoreNowPlayingMovies,
   }) {
     return fetchNowPlayingMovies(this);
   }
@@ -226,6 +202,7 @@ class _$FetchMoviesImpl implements _FetchMovies {
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_FetchMovies value)? fetchNowPlayingMovies,
+    TResult? Function(_FetchMoreDat value)? fetchMoreNowPlayingMovies,
   }) {
     return fetchNowPlayingMovies?.call(this);
   }
@@ -234,6 +211,7 @@ class _$FetchMoviesImpl implements _FetchMovies {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_FetchMovies value)? fetchNowPlayingMovies,
+    TResult Function(_FetchMoreDat value)? fetchMoreNowPlayingMovies,
     required TResult orElse(),
   }) {
     if (fetchNowPlayingMovies != null) {
@@ -244,17 +222,151 @@ class _$FetchMoviesImpl implements _FetchMovies {
 }
 
 abstract class _FetchMovies implements NowPlayingMovieEvents {
-  const factory _FetchMovies(
-      {required final int pageKey,
-      final List<NowPlayingResultEntity>? previousData}) = _$FetchMoviesImpl;
+  const factory _FetchMovies({required final int pageKey}) = _$FetchMoviesImpl;
 
   @override
   int get pageKey;
   @override
-  List<NowPlayingResultEntity>? get previousData;
-  @override
   @JsonKey(ignore: true)
   _$$FetchMoviesImplCopyWith<_$FetchMoviesImpl> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class _$$FetchMoreDatImplCopyWith<$Res>
+    implements $NowPlayingMovieEventsCopyWith<$Res> {
+  factory _$$FetchMoreDatImplCopyWith(
+          _$FetchMoreDatImpl value, $Res Function(_$FetchMoreDatImpl) then) =
+      __$$FetchMoreDatImplCopyWithImpl<$Res>;
+  @override
+  @useResult
+  $Res call({int pageKey});
+}
+
+/// @nodoc
+class __$$FetchMoreDatImplCopyWithImpl<$Res>
+    extends _$NowPlayingMovieEventsCopyWithImpl<$Res, _$FetchMoreDatImpl>
+    implements _$$FetchMoreDatImplCopyWith<$Res> {
+  __$$FetchMoreDatImplCopyWithImpl(
+      _$FetchMoreDatImpl _value, $Res Function(_$FetchMoreDatImpl) _then)
+      : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? pageKey = null,
+  }) {
+    return _then(_$FetchMoreDatImpl(
+      pageKey: null == pageKey
+          ? _value.pageKey
+          : pageKey // ignore: cast_nullable_to_non_nullable
+              as int,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$FetchMoreDatImpl implements _FetchMoreDat {
+  const _$FetchMoreDatImpl({required this.pageKey});
+
+  @override
+  final int pageKey;
+
+  @override
+  String toString() {
+    return 'NowPlayingMovieEvents.fetchMoreNowPlayingMovies(pageKey: $pageKey)';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$FetchMoreDatImpl &&
+            (identical(other.pageKey, pageKey) || other.pageKey == pageKey));
+  }
+
+  @override
+  int get hashCode => Object.hash(runtimeType, pageKey);
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$FetchMoreDatImplCopyWith<_$FetchMoreDatImpl> get copyWith =>
+      __$$FetchMoreDatImplCopyWithImpl<_$FetchMoreDatImpl>(this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function(int pageKey) fetchNowPlayingMovies,
+    required TResult Function(int pageKey) fetchMoreNowPlayingMovies,
+  }) {
+    return fetchMoreNowPlayingMovies(pageKey);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function(int pageKey)? fetchNowPlayingMovies,
+    TResult? Function(int pageKey)? fetchMoreNowPlayingMovies,
+  }) {
+    return fetchMoreNowPlayingMovies?.call(pageKey);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function(int pageKey)? fetchNowPlayingMovies,
+    TResult Function(int pageKey)? fetchMoreNowPlayingMovies,
+    required TResult orElse(),
+  }) {
+    if (fetchMoreNowPlayingMovies != null) {
+      return fetchMoreNowPlayingMovies(pageKey);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_FetchMovies value) fetchNowPlayingMovies,
+    required TResult Function(_FetchMoreDat value) fetchMoreNowPlayingMovies,
+  }) {
+    return fetchMoreNowPlayingMovies(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_FetchMovies value)? fetchNowPlayingMovies,
+    TResult? Function(_FetchMoreDat value)? fetchMoreNowPlayingMovies,
+  }) {
+    return fetchMoreNowPlayingMovies?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_FetchMovies value)? fetchNowPlayingMovies,
+    TResult Function(_FetchMoreDat value)? fetchMoreNowPlayingMovies,
+    required TResult orElse(),
+  }) {
+    if (fetchMoreNowPlayingMovies != null) {
+      return fetchMoreNowPlayingMovies(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _FetchMoreDat implements NowPlayingMovieEvents {
+  const factory _FetchMoreDat({required final int pageKey}) =
+      _$FetchMoreDatImpl;
+
+  @override
+  int get pageKey;
+  @override
+  @JsonKey(ignore: true)
+  _$$FetchMoreDatImplCopyWith<_$FetchMoreDatImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
@@ -264,6 +376,7 @@ mixin _$NowPlayingMoviesStates {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() loading,
+    required TResult Function() loadingMoreMovies,
     required TResult Function(List<NowPlayingResultEntity> data) loaded,
     required TResult Function(String errorMessage) error,
   }) =>
@@ -272,6 +385,7 @@ mixin _$NowPlayingMoviesStates {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
     TResult? Function()? loading,
+    TResult? Function()? loadingMoreMovies,
     TResult? Function(List<NowPlayingResultEntity> data)? loaded,
     TResult? Function(String errorMessage)? error,
   }) =>
@@ -280,6 +394,7 @@ mixin _$NowPlayingMoviesStates {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
+    TResult Function()? loadingMoreMovies,
     TResult Function(List<NowPlayingResultEntity> data)? loaded,
     TResult Function(String errorMessage)? error,
     required TResult orElse(),
@@ -289,6 +404,7 @@ mixin _$NowPlayingMoviesStates {
   TResult map<TResult extends Object?>({
     required TResult Function(_Initial value) initial,
     required TResult Function(_Loading value) loading,
+    required TResult Function(_LoadingMoreMovies value) loadingMoreMovies,
     required TResult Function(_Loaded value) loaded,
     required TResult Function(_Error value) error,
   }) =>
@@ -297,6 +413,7 @@ mixin _$NowPlayingMoviesStates {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_Initial value)? initial,
     TResult? Function(_Loading value)? loading,
+    TResult? Function(_LoadingMoreMovies value)? loadingMoreMovies,
     TResult? Function(_Loaded value)? loaded,
     TResult? Function(_Error value)? error,
   }) =>
@@ -305,6 +422,7 @@ mixin _$NowPlayingMoviesStates {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Initial value)? initial,
     TResult Function(_Loading value)? loading,
+    TResult Function(_LoadingMoreMovies value)? loadingMoreMovies,
     TResult Function(_Loaded value)? loaded,
     TResult Function(_Error value)? error,
     required TResult orElse(),
@@ -371,6 +489,7 @@ class _$InitialImpl implements _Initial {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() loading,
+    required TResult Function() loadingMoreMovies,
     required TResult Function(List<NowPlayingResultEntity> data) loaded,
     required TResult Function(String errorMessage) error,
   }) {
@@ -382,6 +501,7 @@ class _$InitialImpl implements _Initial {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
     TResult? Function()? loading,
+    TResult? Function()? loadingMoreMovies,
     TResult? Function(List<NowPlayingResultEntity> data)? loaded,
     TResult? Function(String errorMessage)? error,
   }) {
@@ -393,6 +513,7 @@ class _$InitialImpl implements _Initial {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
+    TResult Function()? loadingMoreMovies,
     TResult Function(List<NowPlayingResultEntity> data)? loaded,
     TResult Function(String errorMessage)? error,
     required TResult orElse(),
@@ -408,6 +529,7 @@ class _$InitialImpl implements _Initial {
   TResult map<TResult extends Object?>({
     required TResult Function(_Initial value) initial,
     required TResult Function(_Loading value) loading,
+    required TResult Function(_LoadingMoreMovies value) loadingMoreMovies,
     required TResult Function(_Loaded value) loaded,
     required TResult Function(_Error value) error,
   }) {
@@ -419,6 +541,7 @@ class _$InitialImpl implements _Initial {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_Initial value)? initial,
     TResult? Function(_Loading value)? loading,
+    TResult? Function(_LoadingMoreMovies value)? loadingMoreMovies,
     TResult? Function(_Loaded value)? loaded,
     TResult? Function(_Error value)? error,
   }) {
@@ -430,6 +553,7 @@ class _$InitialImpl implements _Initial {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Initial value)? initial,
     TResult Function(_Loading value)? loading,
+    TResult Function(_LoadingMoreMovies value)? loadingMoreMovies,
     TResult Function(_Loaded value)? loaded,
     TResult Function(_Error value)? error,
     required TResult orElse(),
@@ -485,6 +609,7 @@ class _$LoadingImpl implements _Loading {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() loading,
+    required TResult Function() loadingMoreMovies,
     required TResult Function(List<NowPlayingResultEntity> data) loaded,
     required TResult Function(String errorMessage) error,
   }) {
@@ -496,6 +621,7 @@ class _$LoadingImpl implements _Loading {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
     TResult? Function()? loading,
+    TResult? Function()? loadingMoreMovies,
     TResult? Function(List<NowPlayingResultEntity> data)? loaded,
     TResult? Function(String errorMessage)? error,
   }) {
@@ -507,6 +633,7 @@ class _$LoadingImpl implements _Loading {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
+    TResult Function()? loadingMoreMovies,
     TResult Function(List<NowPlayingResultEntity> data)? loaded,
     TResult Function(String errorMessage)? error,
     required TResult orElse(),
@@ -522,6 +649,7 @@ class _$LoadingImpl implements _Loading {
   TResult map<TResult extends Object?>({
     required TResult Function(_Initial value) initial,
     required TResult Function(_Loading value) loading,
+    required TResult Function(_LoadingMoreMovies value) loadingMoreMovies,
     required TResult Function(_Loaded value) loaded,
     required TResult Function(_Error value) error,
   }) {
@@ -533,6 +661,7 @@ class _$LoadingImpl implements _Loading {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_Initial value)? initial,
     TResult? Function(_Loading value)? loading,
+    TResult? Function(_LoadingMoreMovies value)? loadingMoreMovies,
     TResult? Function(_Loaded value)? loaded,
     TResult? Function(_Error value)? error,
   }) {
@@ -544,6 +673,7 @@ class _$LoadingImpl implements _Loading {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Initial value)? initial,
     TResult Function(_Loading value)? loading,
+    TResult Function(_LoadingMoreMovies value)? loadingMoreMovies,
     TResult Function(_Loaded value)? loaded,
     TResult Function(_Error value)? error,
     required TResult orElse(),
@@ -557,6 +687,126 @@ class _$LoadingImpl implements _Loading {
 
 abstract class _Loading implements NowPlayingMoviesStates {
   const factory _Loading() = _$LoadingImpl;
+}
+
+/// @nodoc
+abstract class _$$LoadingMoreMoviesImplCopyWith<$Res> {
+  factory _$$LoadingMoreMoviesImplCopyWith(_$LoadingMoreMoviesImpl value,
+          $Res Function(_$LoadingMoreMoviesImpl) then) =
+      __$$LoadingMoreMoviesImplCopyWithImpl<$Res>;
+}
+
+/// @nodoc
+class __$$LoadingMoreMoviesImplCopyWithImpl<$Res>
+    extends _$NowPlayingMoviesStatesCopyWithImpl<$Res, _$LoadingMoreMoviesImpl>
+    implements _$$LoadingMoreMoviesImplCopyWith<$Res> {
+  __$$LoadingMoreMoviesImplCopyWithImpl(_$LoadingMoreMoviesImpl _value,
+      $Res Function(_$LoadingMoreMoviesImpl) _then)
+      : super(_value, _then);
+}
+
+/// @nodoc
+
+class _$LoadingMoreMoviesImpl implements _LoadingMoreMovies {
+  const _$LoadingMoreMoviesImpl();
+
+  @override
+  String toString() {
+    return 'NowPlayingMoviesStates.loadingMoreMovies()';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType && other is _$LoadingMoreMoviesImpl);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() initial,
+    required TResult Function() loading,
+    required TResult Function() loadingMoreMovies,
+    required TResult Function(List<NowPlayingResultEntity> data) loaded,
+    required TResult Function(String errorMessage) error,
+  }) {
+    return loadingMoreMovies();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? initial,
+    TResult? Function()? loading,
+    TResult? Function()? loadingMoreMovies,
+    TResult? Function(List<NowPlayingResultEntity> data)? loaded,
+    TResult? Function(String errorMessage)? error,
+  }) {
+    return loadingMoreMovies?.call();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? initial,
+    TResult Function()? loading,
+    TResult Function()? loadingMoreMovies,
+    TResult Function(List<NowPlayingResultEntity> data)? loaded,
+    TResult Function(String errorMessage)? error,
+    required TResult orElse(),
+  }) {
+    if (loadingMoreMovies != null) {
+      return loadingMoreMovies();
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_Initial value) initial,
+    required TResult Function(_Loading value) loading,
+    required TResult Function(_LoadingMoreMovies value) loadingMoreMovies,
+    required TResult Function(_Loaded value) loaded,
+    required TResult Function(_Error value) error,
+  }) {
+    return loadingMoreMovies(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_Initial value)? initial,
+    TResult? Function(_Loading value)? loading,
+    TResult? Function(_LoadingMoreMovies value)? loadingMoreMovies,
+    TResult? Function(_Loaded value)? loaded,
+    TResult? Function(_Error value)? error,
+  }) {
+    return loadingMoreMovies?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_Initial value)? initial,
+    TResult Function(_Loading value)? loading,
+    TResult Function(_LoadingMoreMovies value)? loadingMoreMovies,
+    TResult Function(_Loaded value)? loaded,
+    TResult Function(_Error value)? error,
+    required TResult orElse(),
+  }) {
+    if (loadingMoreMovies != null) {
+      return loadingMoreMovies(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _LoadingMoreMovies implements NowPlayingMoviesStates {
+  const factory _LoadingMoreMovies() = _$LoadingMoreMoviesImpl;
 }
 
 /// @nodoc
@@ -632,6 +882,7 @@ class _$LoadedImpl implements _Loaded {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() loading,
+    required TResult Function() loadingMoreMovies,
     required TResult Function(List<NowPlayingResultEntity> data) loaded,
     required TResult Function(String errorMessage) error,
   }) {
@@ -643,6 +894,7 @@ class _$LoadedImpl implements _Loaded {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
     TResult? Function()? loading,
+    TResult? Function()? loadingMoreMovies,
     TResult? Function(List<NowPlayingResultEntity> data)? loaded,
     TResult? Function(String errorMessage)? error,
   }) {
@@ -654,6 +906,7 @@ class _$LoadedImpl implements _Loaded {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
+    TResult Function()? loadingMoreMovies,
     TResult Function(List<NowPlayingResultEntity> data)? loaded,
     TResult Function(String errorMessage)? error,
     required TResult orElse(),
@@ -669,6 +922,7 @@ class _$LoadedImpl implements _Loaded {
   TResult map<TResult extends Object?>({
     required TResult Function(_Initial value) initial,
     required TResult Function(_Loading value) loading,
+    required TResult Function(_LoadingMoreMovies value) loadingMoreMovies,
     required TResult Function(_Loaded value) loaded,
     required TResult Function(_Error value) error,
   }) {
@@ -680,6 +934,7 @@ class _$LoadedImpl implements _Loaded {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_Initial value)? initial,
     TResult? Function(_Loading value)? loading,
+    TResult? Function(_LoadingMoreMovies value)? loadingMoreMovies,
     TResult? Function(_Loaded value)? loaded,
     TResult? Function(_Error value)? error,
   }) {
@@ -691,6 +946,7 @@ class _$LoadedImpl implements _Loaded {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Initial value)? initial,
     TResult Function(_Loading value)? loading,
+    TResult Function(_LoadingMoreMovies value)? loadingMoreMovies,
     TResult Function(_Loaded value)? loaded,
     TResult Function(_Error value)? error,
     required TResult orElse(),
@@ -779,6 +1035,7 @@ class _$ErrorImpl implements _Error {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() loading,
+    required TResult Function() loadingMoreMovies,
     required TResult Function(List<NowPlayingResultEntity> data) loaded,
     required TResult Function(String errorMessage) error,
   }) {
@@ -790,6 +1047,7 @@ class _$ErrorImpl implements _Error {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
     TResult? Function()? loading,
+    TResult? Function()? loadingMoreMovies,
     TResult? Function(List<NowPlayingResultEntity> data)? loaded,
     TResult? Function(String errorMessage)? error,
   }) {
@@ -801,6 +1059,7 @@ class _$ErrorImpl implements _Error {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
+    TResult Function()? loadingMoreMovies,
     TResult Function(List<NowPlayingResultEntity> data)? loaded,
     TResult Function(String errorMessage)? error,
     required TResult orElse(),
@@ -816,6 +1075,7 @@ class _$ErrorImpl implements _Error {
   TResult map<TResult extends Object?>({
     required TResult Function(_Initial value) initial,
     required TResult Function(_Loading value) loading,
+    required TResult Function(_LoadingMoreMovies value) loadingMoreMovies,
     required TResult Function(_Loaded value) loaded,
     required TResult Function(_Error value) error,
   }) {
@@ -827,6 +1087,7 @@ class _$ErrorImpl implements _Error {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_Initial value)? initial,
     TResult? Function(_Loading value)? loading,
+    TResult? Function(_LoadingMoreMovies value)? loadingMoreMovies,
     TResult? Function(_Loaded value)? loaded,
     TResult? Function(_Error value)? error,
   }) {
@@ -838,6 +1099,7 @@ class _$ErrorImpl implements _Error {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Initial value)? initial,
     TResult Function(_Loading value)? loading,
+    TResult Function(_LoadingMoreMovies value)? loadingMoreMovies,
     TResult Function(_Loaded value)? loaded,
     TResult Function(_Error value)? error,
     required TResult orElse(),

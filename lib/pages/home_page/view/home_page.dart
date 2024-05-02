@@ -17,7 +17,6 @@ import 'package:movie_app/routes/constants/routes_name.dart';
 import 'package:movie_app/services/api/constants/api_constants.dart';
 import 'package:movie_app/services/geo_location/location_service.dart';
 import 'package:movie_app/services/geo_location/models/address_model.dart';
-import 'package:movie_app/services/logger/logger_service.dart';
 import 'package:movie_app/utils/themes/color_constants.dart';
 import 'package:movie_app/utils/utilities.dart';
 
@@ -37,6 +36,8 @@ part 'widgets/top_playing_card/movie_rating_vote_widget.dart';
 
 part 'widgets/top_movie_widget.dart';
 part 'widgets/home_page_loaded_widget.dart';
+
+part 'widgets/now_playing_card/custom_dot_indicators.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
