@@ -34,6 +34,8 @@ part 'widgets/top_playing_card/top_playing_card_widget.dart';
 part 'widgets/top_playing_card/movie_poster_widget.dart';
 part 'widgets/top_playing_card/movie_rating_vote_widget.dart';
 
+part 'widgets/top_movies_list_widget.dart';
+
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
 
@@ -78,13 +80,14 @@ class _HomePageState extends State<HomePage> {
             body: DecoratedBox(
               decoration: const BoxDecoration(
                 gradient: LinearGradient(
-                    colors: [
-                      ColorConstants.kPrimaryBackgroundColor,
-                      ColorConstants.kSecondaryBackgroundColor,
-                    ],
-                    begin: Alignment.bottomCenter,
-                    end: Alignment.topCenter,
-                    stops: [0.06, 0.5]),
+                  colors: [
+                    ColorConstants.kPrimaryBackgroundColor,
+                    ColorConstants.kSecondaryBackgroundColor,
+                  ],
+                  begin: Alignment.bottomCenter,
+                  end: Alignment.topCenter,
+                  stops: [0.06, 0.5],
+                ),
               ),
               child: SafeArea(
                 child: Padding(
@@ -144,16 +147,13 @@ class _HomePageState extends State<HomePage> {
                             );
                           },
                         ),
-                        const SliverToBoxAdapter(child: SizedBox(height: 8.0)),
                         const SliverToBoxAdapter(
                           child: CardTitleWidget(title: "Top Rated"),
                         ),
-                        const SliverToBoxAdapter(child: SizedBox(height: 8.0)),
                         BlocBuilder<TopMoviesBloc, TopMoviesStates>(
                           buildWhen: (previous, current) {
                             return current.maybeMap(
-                              loaded: (_) => false,
-                              error: (_) => false,
+                              loadingMoreMovies: (_) => false,
                               orElse: () => true,
                             );
                           },
@@ -163,38 +163,19 @@ class _HomePageState extends State<HomePage> {
                                 child: SizedBox.shrink(),
                               ),
                               loaded: (data) {
-                                // _controller.addListener(() {
-                                //   var nextPageTrigger = 0.8 *
-                                //       _controller.position.maxScrollExtent;
-                                //   if (_controller.position.pixels >
-                                //       nextPageTrigger) {
-                                //     Logs().debugLog("LAFAFJLKJAFKAJFLALKFLJF");
-                                //   }
-                                // });
-                                return SliverList.builder(
-                                  itemCount: data.length,
-                                  itemBuilder: (context, index) {
-                                    final TopMoviesResultEntity movie =
-                                        data[index];
-                                    return Padding(
-                                      padding: const EdgeInsets.symmetric(
-                                        vertical: 8.0,
-                                      ),
-                                      child: AspectRatio(
-                                        aspectRatio: 16 / 13.5,
-                                        child:
-                                            TopPlayingCardWidget(data: movie),
-                                      ),
-                                    );
-                                  },
-                                );
+                                return const TopMoviesWidget();
                               },
                               orElse: () => const SliverToBoxAdapter(
                                 child: SizedBox.shrink(),
                               ),
                             );
                           },
-                        )
+                        ),
+                        // context.read<TopMoviesBloc>().state ==
+                        //         const TopMoviesStates.loadingMoreMovies()
+                        //     ? const SliverToBoxAdapter(
+                        //         child: Center(child: CircularProgressIndicator()))
+                        //     : const SliverToBoxAdapter(child: SizedBox.shrink())
                       ],
                     ),
                   ),

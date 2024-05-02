@@ -15,7 +15,7 @@ class CustomBottomNavBarTheme {
       backgroundColor: ColorConstants.kPrimaryBackgroundColor,
       elevation: 2.0,
       showUnselectedLabels: true,
-      unselectedItemColor: ColorConstants.kSecondaryAccentColor,
+      unselectedItemColor: ColorConstants.kPrimaryAccentColor,
       selectedItemColor: ColorConstants.kPrimaryAccentColor,
       unselectedLabelStyle: TextStyle(
         fontWeight: FontWeight.w600,

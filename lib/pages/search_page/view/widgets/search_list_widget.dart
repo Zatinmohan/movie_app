@@ -34,6 +34,12 @@ class _SearchListWidgetState extends State<SearchListWidget> {
   }
 
   @override
+  void dispose() {
+    controller.dispose();
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     final double size = MediaQuery.sizeOf(context).width;
     return Column(

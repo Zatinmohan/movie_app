@@ -16,42 +16,42 @@ final _privateConstructorUsedError = UnsupportedError(
 
 /// @nodoc
 mixin _$TopMoviesEvents {
-  List<TopMoviesResultEntity>? get previousData =>
-      throw _privateConstructorUsedError;
   int get pageKey => throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(
-            List<TopMoviesResultEntity>? previousData, int pageKey)
-        fetchTopMovies,
+    required TResult Function(int pageKey) fetchTopMovies,
+    required TResult Function(int pageKey) fetchMoreMovies,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(List<TopMoviesResultEntity>? previousData, int pageKey)?
-        fetchTopMovies,
+    TResult? Function(int pageKey)? fetchTopMovies,
+    TResult? Function(int pageKey)? fetchMoreMovies,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(List<TopMoviesResultEntity>? previousData, int pageKey)?
-        fetchTopMovies,
+    TResult Function(int pageKey)? fetchTopMovies,
+    TResult Function(int pageKey)? fetchMoreMovies,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(_TopMoviesEvents value) fetchTopMovies,
+    required TResult Function(_FetchMoreMovies value) fetchMoreMovies,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_TopMoviesEvents value)? fetchTopMovies,
+    TResult? Function(_FetchMoreMovies value)? fetchMoreMovies,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_TopMoviesEvents value)? fetchTopMovies,
+    TResult Function(_FetchMoreMovies value)? fetchMoreMovies,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -67,7 +67,7 @@ abstract class $TopMoviesEventsCopyWith<$Res> {
           TopMoviesEvents value, $Res Function(TopMoviesEvents) then) =
       _$TopMoviesEventsCopyWithImpl<$Res, TopMoviesEvents>;
   @useResult
-  $Res call({List<TopMoviesResultEntity>? previousData, int pageKey});
+  $Res call({int pageKey});
 }
 
 /// @nodoc
@@ -83,14 +83,9 @@ class _$TopMoviesEventsCopyWithImpl<$Res, $Val extends TopMoviesEvents>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? previousData = freezed,
     Object? pageKey = null,
   }) {
     return _then(_value.copyWith(
-      previousData: freezed == previousData
-          ? _value.previousData
-          : previousData // ignore: cast_nullable_to_non_nullable
-              as List<TopMoviesResultEntity>?,
       pageKey: null == pageKey
           ? _value.pageKey
           : pageKey // ignore: cast_nullable_to_non_nullable
@@ -107,7 +102,7 @@ abstract class _$$TopMoviesEventsImplCopyWith<$Res>
       __$$TopMoviesEventsImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({List<TopMoviesResultEntity>? previousData, int pageKey});
+  $Res call({int pageKey});
 }
 
 /// @nodoc
@@ -121,14 +116,9 @@ class __$$TopMoviesEventsImplCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? previousData = freezed,
     Object? pageKey = null,
   }) {
     return _then(_$TopMoviesEventsImpl(
-      previousData: freezed == previousData
-          ? _value._previousData
-          : previousData // ignore: cast_nullable_to_non_nullable
-              as List<TopMoviesResultEntity>?,
       pageKey: null == pageKey
           ? _value.pageKey
           : pageKey // ignore: cast_nullable_to_non_nullable
@@ -140,26 +130,14 @@ class __$$TopMoviesEventsImplCopyWithImpl<$Res>
 /// @nodoc
 
 class _$TopMoviesEventsImpl implements _TopMoviesEvents {
-  const _$TopMoviesEventsImpl(
-      {final List<TopMoviesResultEntity>? previousData, required this.pageKey})
-      : _previousData = previousData;
-
-  final List<TopMoviesResultEntity>? _previousData;
-  @override
-  List<TopMoviesResultEntity>? get previousData {
-    final value = _previousData;
-    if (value == null) return null;
-    if (_previousData is EqualUnmodifiableListView) return _previousData;
-    // ignore: implicit_dynamic_type
-    return EqualUnmodifiableListView(value);
-  }
+  const _$TopMoviesEventsImpl({required this.pageKey});
 
   @override
   final int pageKey;
 
   @override
   String toString() {
-    return 'TopMoviesEvents.fetchTopMovies(previousData: $previousData, pageKey: $pageKey)';
+    return 'TopMoviesEvents.fetchTopMovies(pageKey: $pageKey)';
   }
 
   @override
@@ -167,14 +145,11 @@ class _$TopMoviesEventsImpl implements _TopMoviesEvents {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$TopMoviesEventsImpl &&
-            const DeepCollectionEquality()
-                .equals(other._previousData, _previousData) &&
             (identical(other.pageKey, pageKey) || other.pageKey == pageKey));
   }
 
   @override
-  int get hashCode => Object.hash(
-      runtimeType, const DeepCollectionEquality().hash(_previousData), pageKey);
+  int get hashCode => Object.hash(runtimeType, pageKey);
 
   @JsonKey(ignore: true)
   @override
@@ -186,31 +161,30 @@ class _$TopMoviesEventsImpl implements _TopMoviesEvents {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(
-            List<TopMoviesResultEntity>? previousData, int pageKey)
-        fetchTopMovies,
+    required TResult Function(int pageKey) fetchTopMovies,
+    required TResult Function(int pageKey) fetchMoreMovies,
   }) {
-    return fetchTopMovies(previousData, pageKey);
+    return fetchTopMovies(pageKey);
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(List<TopMoviesResultEntity>? previousData, int pageKey)?
-        fetchTopMovies,
+    TResult? Function(int pageKey)? fetchTopMovies,
+    TResult? Function(int pageKey)? fetchMoreMovies,
   }) {
-    return fetchTopMovies?.call(previousData, pageKey);
+    return fetchTopMovies?.call(pageKey);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(List<TopMoviesResultEntity>? previousData, int pageKey)?
-        fetchTopMovies,
+    TResult Function(int pageKey)? fetchTopMovies,
+    TResult Function(int pageKey)? fetchMoreMovies,
     required TResult orElse(),
   }) {
     if (fetchTopMovies != null) {
-      return fetchTopMovies(previousData, pageKey);
+      return fetchTopMovies(pageKey);
     }
     return orElse();
   }
@@ -219,6 +193,7 @@ class _$TopMoviesEventsImpl implements _TopMoviesEvents {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(_TopMoviesEvents value) fetchTopMovies,
+    required TResult Function(_FetchMoreMovies value) fetchMoreMovies,
   }) {
     return fetchTopMovies(this);
   }
@@ -227,6 +202,7 @@ class _$TopMoviesEventsImpl implements _TopMoviesEvents {
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_TopMoviesEvents value)? fetchTopMovies,
+    TResult? Function(_FetchMoreMovies value)? fetchMoreMovies,
   }) {
     return fetchTopMovies?.call(this);
   }
@@ -235,6 +211,7 @@ class _$TopMoviesEventsImpl implements _TopMoviesEvents {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_TopMoviesEvents value)? fetchTopMovies,
+    TResult Function(_FetchMoreMovies value)? fetchMoreMovies,
     required TResult orElse(),
   }) {
     if (fetchTopMovies != null) {
@@ -245,17 +222,153 @@ class _$TopMoviesEventsImpl implements _TopMoviesEvents {
 }
 
 abstract class _TopMoviesEvents implements TopMoviesEvents {
-  const factory _TopMoviesEvents(
-      {final List<TopMoviesResultEntity>? previousData,
-      required final int pageKey}) = _$TopMoviesEventsImpl;
+  const factory _TopMoviesEvents({required final int pageKey}) =
+      _$TopMoviesEventsImpl;
 
-  @override
-  List<TopMoviesResultEntity>? get previousData;
   @override
   int get pageKey;
   @override
   @JsonKey(ignore: true)
   _$$TopMoviesEventsImplCopyWith<_$TopMoviesEventsImpl> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class _$$FetchMoreMoviesImplCopyWith<$Res>
+    implements $TopMoviesEventsCopyWith<$Res> {
+  factory _$$FetchMoreMoviesImplCopyWith(_$FetchMoreMoviesImpl value,
+          $Res Function(_$FetchMoreMoviesImpl) then) =
+      __$$FetchMoreMoviesImplCopyWithImpl<$Res>;
+  @override
+  @useResult
+  $Res call({int pageKey});
+}
+
+/// @nodoc
+class __$$FetchMoreMoviesImplCopyWithImpl<$Res>
+    extends _$TopMoviesEventsCopyWithImpl<$Res, _$FetchMoreMoviesImpl>
+    implements _$$FetchMoreMoviesImplCopyWith<$Res> {
+  __$$FetchMoreMoviesImplCopyWithImpl(
+      _$FetchMoreMoviesImpl _value, $Res Function(_$FetchMoreMoviesImpl) _then)
+      : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? pageKey = null,
+  }) {
+    return _then(_$FetchMoreMoviesImpl(
+      pageKey: null == pageKey
+          ? _value.pageKey
+          : pageKey // ignore: cast_nullable_to_non_nullable
+              as int,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$FetchMoreMoviesImpl implements _FetchMoreMovies {
+  const _$FetchMoreMoviesImpl({required this.pageKey});
+
+  @override
+  final int pageKey;
+
+  @override
+  String toString() {
+    return 'TopMoviesEvents.fetchMoreMovies(pageKey: $pageKey)';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$FetchMoreMoviesImpl &&
+            (identical(other.pageKey, pageKey) || other.pageKey == pageKey));
+  }
+
+  @override
+  int get hashCode => Object.hash(runtimeType, pageKey);
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$FetchMoreMoviesImplCopyWith<_$FetchMoreMoviesImpl> get copyWith =>
+      __$$FetchMoreMoviesImplCopyWithImpl<_$FetchMoreMoviesImpl>(
+          this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function(int pageKey) fetchTopMovies,
+    required TResult Function(int pageKey) fetchMoreMovies,
+  }) {
+    return fetchMoreMovies(pageKey);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function(int pageKey)? fetchTopMovies,
+    TResult? Function(int pageKey)? fetchMoreMovies,
+  }) {
+    return fetchMoreMovies?.call(pageKey);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function(int pageKey)? fetchTopMovies,
+    TResult Function(int pageKey)? fetchMoreMovies,
+    required TResult orElse(),
+  }) {
+    if (fetchMoreMovies != null) {
+      return fetchMoreMovies(pageKey);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_TopMoviesEvents value) fetchTopMovies,
+    required TResult Function(_FetchMoreMovies value) fetchMoreMovies,
+  }) {
+    return fetchMoreMovies(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_TopMoviesEvents value)? fetchTopMovies,
+    TResult? Function(_FetchMoreMovies value)? fetchMoreMovies,
+  }) {
+    return fetchMoreMovies?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_TopMoviesEvents value)? fetchTopMovies,
+    TResult Function(_FetchMoreMovies value)? fetchMoreMovies,
+    required TResult orElse(),
+  }) {
+    if (fetchMoreMovies != null) {
+      return fetchMoreMovies(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _FetchMoreMovies implements TopMoviesEvents {
+  const factory _FetchMoreMovies({required final int pageKey}) =
+      _$FetchMoreMoviesImpl;
+
+  @override
+  int get pageKey;
+  @override
+  @JsonKey(ignore: true)
+  _$$FetchMoreMoviesImplCopyWith<_$FetchMoreMoviesImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
@@ -266,6 +379,7 @@ mixin _$TopMoviesStates {
     required TResult Function() initial,
     required TResult Function() loading,
     required TResult Function(List<TopMoviesResultEntity> data) loaded,
+    required TResult Function() loadingMoreMovies,
     required TResult Function(String error) error,
   }) =>
       throw _privateConstructorUsedError;
@@ -274,6 +388,7 @@ mixin _$TopMoviesStates {
     TResult? Function()? initial,
     TResult? Function()? loading,
     TResult? Function(List<TopMoviesResultEntity> data)? loaded,
+    TResult? Function()? loadingMoreMovies,
     TResult? Function(String error)? error,
   }) =>
       throw _privateConstructorUsedError;
@@ -282,6 +397,7 @@ mixin _$TopMoviesStates {
     TResult Function()? initial,
     TResult Function()? loading,
     TResult Function(List<TopMoviesResultEntity> data)? loaded,
+    TResult Function()? loadingMoreMovies,
     TResult Function(String error)? error,
     required TResult orElse(),
   }) =>
@@ -291,6 +407,7 @@ mixin _$TopMoviesStates {
     required TResult Function(_Initial value) initial,
     required TResult Function(_Loading value) loading,
     required TResult Function(_Loaded value) loaded,
+    required TResult Function(_LoadingMoreMovies value) loadingMoreMovies,
     required TResult Function(_Error value) error,
   }) =>
       throw _privateConstructorUsedError;
@@ -299,6 +416,7 @@ mixin _$TopMoviesStates {
     TResult? Function(_Initial value)? initial,
     TResult? Function(_Loading value)? loading,
     TResult? Function(_Loaded value)? loaded,
+    TResult? Function(_LoadingMoreMovies value)? loadingMoreMovies,
     TResult? Function(_Error value)? error,
   }) =>
       throw _privateConstructorUsedError;
@@ -307,6 +425,7 @@ mixin _$TopMoviesStates {
     TResult Function(_Initial value)? initial,
     TResult Function(_Loading value)? loading,
     TResult Function(_Loaded value)? loaded,
+    TResult Function(_LoadingMoreMovies value)? loadingMoreMovies,
     TResult Function(_Error value)? error,
     required TResult orElse(),
   }) =>
@@ -372,6 +491,7 @@ class _$InitialImpl implements _Initial {
     required TResult Function() initial,
     required TResult Function() loading,
     required TResult Function(List<TopMoviesResultEntity> data) loaded,
+    required TResult Function() loadingMoreMovies,
     required TResult Function(String error) error,
   }) {
     return initial();
@@ -383,6 +503,7 @@ class _$InitialImpl implements _Initial {
     TResult? Function()? initial,
     TResult? Function()? loading,
     TResult? Function(List<TopMoviesResultEntity> data)? loaded,
+    TResult? Function()? loadingMoreMovies,
     TResult? Function(String error)? error,
   }) {
     return initial?.call();
@@ -394,6 +515,7 @@ class _$InitialImpl implements _Initial {
     TResult Function()? initial,
     TResult Function()? loading,
     TResult Function(List<TopMoviesResultEntity> data)? loaded,
+    TResult Function()? loadingMoreMovies,
     TResult Function(String error)? error,
     required TResult orElse(),
   }) {
@@ -409,6 +531,7 @@ class _$InitialImpl implements _Initial {
     required TResult Function(_Initial value) initial,
     required TResult Function(_Loading value) loading,
     required TResult Function(_Loaded value) loaded,
+    required TResult Function(_LoadingMoreMovies value) loadingMoreMovies,
     required TResult Function(_Error value) error,
   }) {
     return initial(this);
@@ -420,6 +543,7 @@ class _$InitialImpl implements _Initial {
     TResult? Function(_Initial value)? initial,
     TResult? Function(_Loading value)? loading,
     TResult? Function(_Loaded value)? loaded,
+    TResult? Function(_LoadingMoreMovies value)? loadingMoreMovies,
     TResult? Function(_Error value)? error,
   }) {
     return initial?.call(this);
@@ -431,6 +555,7 @@ class _$InitialImpl implements _Initial {
     TResult Function(_Initial value)? initial,
     TResult Function(_Loading value)? loading,
     TResult Function(_Loaded value)? loaded,
+    TResult Function(_LoadingMoreMovies value)? loadingMoreMovies,
     TResult Function(_Error value)? error,
     required TResult orElse(),
   }) {
@@ -486,6 +611,7 @@ class _$LoadingImpl implements _Loading {
     required TResult Function() initial,
     required TResult Function() loading,
     required TResult Function(List<TopMoviesResultEntity> data) loaded,
+    required TResult Function() loadingMoreMovies,
     required TResult Function(String error) error,
   }) {
     return loading();
@@ -497,6 +623,7 @@ class _$LoadingImpl implements _Loading {
     TResult? Function()? initial,
     TResult? Function()? loading,
     TResult? Function(List<TopMoviesResultEntity> data)? loaded,
+    TResult? Function()? loadingMoreMovies,
     TResult? Function(String error)? error,
   }) {
     return loading?.call();
@@ -508,6 +635,7 @@ class _$LoadingImpl implements _Loading {
     TResult Function()? initial,
     TResult Function()? loading,
     TResult Function(List<TopMoviesResultEntity> data)? loaded,
+    TResult Function()? loadingMoreMovies,
     TResult Function(String error)? error,
     required TResult orElse(),
   }) {
@@ -523,6 +651,7 @@ class _$LoadingImpl implements _Loading {
     required TResult Function(_Initial value) initial,
     required TResult Function(_Loading value) loading,
     required TResult Function(_Loaded value) loaded,
+    required TResult Function(_LoadingMoreMovies value) loadingMoreMovies,
     required TResult Function(_Error value) error,
   }) {
     return loading(this);
@@ -534,6 +663,7 @@ class _$LoadingImpl implements _Loading {
     TResult? Function(_Initial value)? initial,
     TResult? Function(_Loading value)? loading,
     TResult? Function(_Loaded value)? loaded,
+    TResult? Function(_LoadingMoreMovies value)? loadingMoreMovies,
     TResult? Function(_Error value)? error,
   }) {
     return loading?.call(this);
@@ -545,6 +675,7 @@ class _$LoadingImpl implements _Loading {
     TResult Function(_Initial value)? initial,
     TResult Function(_Loading value)? loading,
     TResult Function(_Loaded value)? loaded,
+    TResult Function(_LoadingMoreMovies value)? loadingMoreMovies,
     TResult Function(_Error value)? error,
     required TResult orElse(),
   }) {
@@ -633,6 +764,7 @@ class _$LoadedImpl implements _Loaded {
     required TResult Function() initial,
     required TResult Function() loading,
     required TResult Function(List<TopMoviesResultEntity> data) loaded,
+    required TResult Function() loadingMoreMovies,
     required TResult Function(String error) error,
   }) {
     return loaded(data);
@@ -644,6 +776,7 @@ class _$LoadedImpl implements _Loaded {
     TResult? Function()? initial,
     TResult? Function()? loading,
     TResult? Function(List<TopMoviesResultEntity> data)? loaded,
+    TResult? Function()? loadingMoreMovies,
     TResult? Function(String error)? error,
   }) {
     return loaded?.call(data);
@@ -655,6 +788,7 @@ class _$LoadedImpl implements _Loaded {
     TResult Function()? initial,
     TResult Function()? loading,
     TResult Function(List<TopMoviesResultEntity> data)? loaded,
+    TResult Function()? loadingMoreMovies,
     TResult Function(String error)? error,
     required TResult orElse(),
   }) {
@@ -670,6 +804,7 @@ class _$LoadedImpl implements _Loaded {
     required TResult Function(_Initial value) initial,
     required TResult Function(_Loading value) loading,
     required TResult Function(_Loaded value) loaded,
+    required TResult Function(_LoadingMoreMovies value) loadingMoreMovies,
     required TResult Function(_Error value) error,
   }) {
     return loaded(this);
@@ -681,6 +816,7 @@ class _$LoadedImpl implements _Loaded {
     TResult? Function(_Initial value)? initial,
     TResult? Function(_Loading value)? loading,
     TResult? Function(_Loaded value)? loaded,
+    TResult? Function(_LoadingMoreMovies value)? loadingMoreMovies,
     TResult? Function(_Error value)? error,
   }) {
     return loaded?.call(this);
@@ -692,6 +828,7 @@ class _$LoadedImpl implements _Loaded {
     TResult Function(_Initial value)? initial,
     TResult Function(_Loading value)? loading,
     TResult Function(_Loaded value)? loaded,
+    TResult Function(_LoadingMoreMovies value)? loadingMoreMovies,
     TResult Function(_Error value)? error,
     required TResult orElse(),
   }) {
@@ -710,6 +847,126 @@ abstract class _Loaded implements TopMoviesStates {
   @JsonKey(ignore: true)
   _$$LoadedImplCopyWith<_$LoadedImpl> get copyWith =>
       throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class _$$LoadingMoreMoviesImplCopyWith<$Res> {
+  factory _$$LoadingMoreMoviesImplCopyWith(_$LoadingMoreMoviesImpl value,
+          $Res Function(_$LoadingMoreMoviesImpl) then) =
+      __$$LoadingMoreMoviesImplCopyWithImpl<$Res>;
+}
+
+/// @nodoc
+class __$$LoadingMoreMoviesImplCopyWithImpl<$Res>
+    extends _$TopMoviesStatesCopyWithImpl<$Res, _$LoadingMoreMoviesImpl>
+    implements _$$LoadingMoreMoviesImplCopyWith<$Res> {
+  __$$LoadingMoreMoviesImplCopyWithImpl(_$LoadingMoreMoviesImpl _value,
+      $Res Function(_$LoadingMoreMoviesImpl) _then)
+      : super(_value, _then);
+}
+
+/// @nodoc
+
+class _$LoadingMoreMoviesImpl implements _LoadingMoreMovies {
+  const _$LoadingMoreMoviesImpl();
+
+  @override
+  String toString() {
+    return 'TopMoviesStates.loadingMoreMovies()';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType && other is _$LoadingMoreMoviesImpl);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() initial,
+    required TResult Function() loading,
+    required TResult Function(List<TopMoviesResultEntity> data) loaded,
+    required TResult Function() loadingMoreMovies,
+    required TResult Function(String error) error,
+  }) {
+    return loadingMoreMovies();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? initial,
+    TResult? Function()? loading,
+    TResult? Function(List<TopMoviesResultEntity> data)? loaded,
+    TResult? Function()? loadingMoreMovies,
+    TResult? Function(String error)? error,
+  }) {
+    return loadingMoreMovies?.call();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? initial,
+    TResult Function()? loading,
+    TResult Function(List<TopMoviesResultEntity> data)? loaded,
+    TResult Function()? loadingMoreMovies,
+    TResult Function(String error)? error,
+    required TResult orElse(),
+  }) {
+    if (loadingMoreMovies != null) {
+      return loadingMoreMovies();
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_Initial value) initial,
+    required TResult Function(_Loading value) loading,
+    required TResult Function(_Loaded value) loaded,
+    required TResult Function(_LoadingMoreMovies value) loadingMoreMovies,
+    required TResult Function(_Error value) error,
+  }) {
+    return loadingMoreMovies(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_Initial value)? initial,
+    TResult? Function(_Loading value)? loading,
+    TResult? Function(_Loaded value)? loaded,
+    TResult? Function(_LoadingMoreMovies value)? loadingMoreMovies,
+    TResult? Function(_Error value)? error,
+  }) {
+    return loadingMoreMovies?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_Initial value)? initial,
+    TResult Function(_Loading value)? loading,
+    TResult Function(_Loaded value)? loaded,
+    TResult Function(_LoadingMoreMovies value)? loadingMoreMovies,
+    TResult Function(_Error value)? error,
+    required TResult orElse(),
+  }) {
+    if (loadingMoreMovies != null) {
+      return loadingMoreMovies(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _LoadingMoreMovies implements TopMoviesStates {
+  const factory _LoadingMoreMovies() = _$LoadingMoreMoviesImpl;
 }
 
 /// @nodoc
@@ -779,6 +1036,7 @@ class _$ErrorImpl implements _Error {
     required TResult Function() initial,
     required TResult Function() loading,
     required TResult Function(List<TopMoviesResultEntity> data) loaded,
+    required TResult Function() loadingMoreMovies,
     required TResult Function(String error) error,
   }) {
     return error(this.error);
@@ -790,6 +1048,7 @@ class _$ErrorImpl implements _Error {
     TResult? Function()? initial,
     TResult? Function()? loading,
     TResult? Function(List<TopMoviesResultEntity> data)? loaded,
+    TResult? Function()? loadingMoreMovies,
     TResult? Function(String error)? error,
   }) {
     return error?.call(this.error);
@@ -801,6 +1060,7 @@ class _$ErrorImpl implements _Error {
     TResult Function()? initial,
     TResult Function()? loading,
     TResult Function(List<TopMoviesResultEntity> data)? loaded,
+    TResult Function()? loadingMoreMovies,
     TResult Function(String error)? error,
     required TResult orElse(),
   }) {
@@ -816,6 +1076,7 @@ class _$ErrorImpl implements _Error {
     required TResult Function(_Initial value) initial,
     required TResult Function(_Loading value) loading,
     required TResult Function(_Loaded value) loaded,
+    required TResult Function(_LoadingMoreMovies value) loadingMoreMovies,
     required TResult Function(_Error value) error,
   }) {
     return error(this);
@@ -827,6 +1088,7 @@ class _$ErrorImpl implements _Error {
     TResult? Function(_Initial value)? initial,
     TResult? Function(_Loading value)? loading,
     TResult? Function(_Loaded value)? loaded,
+    TResult? Function(_LoadingMoreMovies value)? loadingMoreMovies,
     TResult? Function(_Error value)? error,
   }) {
     return error?.call(this);
@@ -838,6 +1100,7 @@ class _$ErrorImpl implements _Error {
     TResult Function(_Initial value)? initial,
     TResult Function(_Loading value)? loading,
     TResult Function(_Loaded value)? loaded,
+    TResult Function(_LoadingMoreMovies value)? loadingMoreMovies,
     TResult Function(_Error value)? error,
     required TResult orElse(),
   }) {

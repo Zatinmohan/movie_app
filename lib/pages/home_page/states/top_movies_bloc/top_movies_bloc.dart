@@ -9,12 +9,14 @@ part 'top_movies_bloc.freezed.dart';
 
 class TopMoviesBloc extends Bloc<TopMoviesEvents, TopMoviesStates> {
   final FetchTopMoviesUsecase _usecase;
+  List<TopMoviesResultEntity> _originalData = [];
   TopMoviesBloc({required FetchTopMoviesUsecase usecase})
       : _usecase = usecase,
         super(const TopMoviesStates.initial()) {
     on<TopMoviesEvents>((event, emit) async {
       await event.map(
-        fetchTopMovies: (_) => _fetchTopMovies(emit, event),
+        fetchTopMovies: (_) async => await _fetchTopMovies(emit, event),
+        fetchMoreMovies: (_) async => await _fetchMoreMovies(emit, event),
       );
     });
   }
@@ -24,21 +26,34 @@ class TopMoviesBloc extends Bloc<TopMoviesEvents, TopMoviesStates> {
     TopMoviesEvents event,
   ) async {
     try {
+      _originalData.clear();
       emit(const TopMoviesStates.loading());
-      final List<TopMoviesResultEntity> newData =
+      final List<TopMoviesResultEntity> data =
           await _usecase.getTopMovies(pageKey: event.pageKey);
 
-      if (event.previousData?.isNotEmpty ?? false) {
-        final List<TopMoviesResultEntity> newList = [
-          ...event.previousData!,
-          ...newData
-        ];
-        emit(TopMoviesStates.loaded(data: newList));
-      } else {
-        emit(TopMoviesStates.loaded(data: newData));
-      }
+      _originalData.addAll(data);
+      emit(TopMoviesStates.loaded(data: data));
     } catch (error) {
       emit(TopMoviesStates.error(error: error.toString()));
+      rethrow;
+    }
+  }
+
+  Future<void> _fetchMoreMovies(
+    Emitter<TopMoviesStates> emit,
+    TopMoviesEvents event,
+  ) async {
+    try {
+      emit(const TopMoviesStates.loadingMoreMovies());
+      final List<TopMoviesResultEntity> newData =
+          await _usecase.getTopMovies(pageKey: event.pageKey);
+      _originalData.addAll(newData);
+
+      if (_originalData.isNotEmpty) {
+        emit(TopMoviesStates.loaded(data: _originalData));
+      }
+    } catch (e) {
+      emit(TopMoviesStates.error(error: e.toString()));
       rethrow;
     }
   }

@@ -27,7 +27,7 @@ class _SplashPageState extends State<SplashPage> with TickerProviderStateMixin {
     WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
       _initLocationService();
       Future.delayed(const Duration(seconds: 2), () {
-        context.pushReplacementNamed(RoutesName.HOME);
+        context.pushReplacementNamed(RoutesName.Main);
       });
     });
     super.initState();
