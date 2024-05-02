@@ -12,7 +12,7 @@ import 'package:movie_app/pages/home_page/states/now_playing_movies_bloc/now_pla
 import 'package:movie_app/pages/home_page/states/top_movies_bloc/top_movies_bloc.dart';
 import 'package:movie_app/pages/home_page/view/widgets/custom_movie_clipper.dart';
 import 'package:movie_app/pages/home_page/view/widgets/now_playing_card/custom_now_playing_clipper.dart';
-import 'package:movie_app/pages/home_page_dependency_injection.dart';
+import 'package:movie_app/pages/home_page/home_page_dependency_injection.dart';
 import 'package:movie_app/routes/constants/routes_name.dart';
 import 'package:movie_app/services/api/constants/api_constants.dart';
 import 'package:movie_app/services/geo_location/location_service.dart';
@@ -59,11 +59,11 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     return MultiBlocProvider(
       providers: [
-        BlocProvider<TopMoviesBloc>(
-          create: (context) => TopMoviesBloc(usecase: sl()),
+        BlocProvider<TopMoviesBloc>.value(
+          value: sl(),
         ),
-        BlocProvider<NowPlayingBloc>(
-          create: (context) => NowPlayingBloc(usecase: sl()),
+        BlocProvider<NowPlayingBloc>.value(
+          value: sl(),
         ),
         BlocProvider<HomeBloc>(
           create: (context) => HomeBloc(

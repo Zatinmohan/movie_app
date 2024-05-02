@@ -925,66 +925,75 @@ abstract class _Error implements SearchState {
 }
 
 /// @nodoc
-mixin _$SearchEvent {
+mixin _$SearchEvent<T> {
   String get name => throw _privateConstructorUsedError;
-  int get pageKey => throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function(String name, int pageKey) fetchData,
     required TResult Function(String name, int pageKey) fetchDataFromNextPage,
+    required TResult Function(
+            String name, SearchFilterType searchType, List<T> data)
+        fetchDataFromLocal,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function(String name, int pageKey)? fetchData,
     TResult? Function(String name, int pageKey)? fetchDataFromNextPage,
+    TResult? Function(String name, SearchFilterType searchType, List<T> data)?
+        fetchDataFromLocal,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(String name, int pageKey)? fetchData,
     TResult Function(String name, int pageKey)? fetchDataFromNextPage,
+    TResult Function(String name, SearchFilterType searchType, List<T> data)?
+        fetchDataFromLocal,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
-    required TResult Function(_FetchData value) fetchData,
-    required TResult Function(_FetchDataFromNextPage value)
+    required TResult Function(_FetchData<T> value) fetchData,
+    required TResult Function(_FetchDataFromNextPage<T> value)
         fetchDataFromNextPage,
+    required TResult Function(_LocalSearch<T> value) fetchDataFromLocal,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(_FetchData value)? fetchData,
-    TResult? Function(_FetchDataFromNextPage value)? fetchDataFromNextPage,
+    TResult? Function(_FetchData<T> value)? fetchData,
+    TResult? Function(_FetchDataFromNextPage<T> value)? fetchDataFromNextPage,
+    TResult? Function(_LocalSearch<T> value)? fetchDataFromLocal,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
-    TResult Function(_FetchData value)? fetchData,
-    TResult Function(_FetchDataFromNextPage value)? fetchDataFromNextPage,
+    TResult Function(_FetchData<T> value)? fetchData,
+    TResult Function(_FetchDataFromNextPage<T> value)? fetchDataFromNextPage,
+    TResult Function(_LocalSearch<T> value)? fetchDataFromLocal,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
-  $SearchEventCopyWith<SearchEvent> get copyWith =>
+  $SearchEventCopyWith<T, SearchEvent<T>> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class $SearchEventCopyWith<$Res> {
+abstract class $SearchEventCopyWith<T, $Res> {
   factory $SearchEventCopyWith(
-          SearchEvent value, $Res Function(SearchEvent) then) =
-      _$SearchEventCopyWithImpl<$Res, SearchEvent>;
+          SearchEvent<T> value, $Res Function(SearchEvent<T>) then) =
+      _$SearchEventCopyWithImpl<T, $Res, SearchEvent<T>>;
   @useResult
-  $Res call({String name, int pageKey});
+  $Res call({String name});
 }
 
 /// @nodoc
-class _$SearchEventCopyWithImpl<$Res, $Val extends SearchEvent>
-    implements $SearchEventCopyWith<$Res> {
+class _$SearchEventCopyWithImpl<T, $Res, $Val extends SearchEvent<T>>
+    implements $SearchEventCopyWith<T, $Res> {
   _$SearchEventCopyWithImpl(this._value, this._then);
 
   // ignore: unused_field
@@ -996,38 +1005,33 @@ class _$SearchEventCopyWithImpl<$Res, $Val extends SearchEvent>
   @override
   $Res call({
     Object? name = null,
-    Object? pageKey = null,
   }) {
     return _then(_value.copyWith(
       name: null == name
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
               as String,
-      pageKey: null == pageKey
-          ? _value.pageKey
-          : pageKey // ignore: cast_nullable_to_non_nullable
-              as int,
     ) as $Val);
   }
 }
 
 /// @nodoc
-abstract class _$$FetchDataImplCopyWith<$Res>
-    implements $SearchEventCopyWith<$Res> {
+abstract class _$$FetchDataImplCopyWith<T, $Res>
+    implements $SearchEventCopyWith<T, $Res> {
   factory _$$FetchDataImplCopyWith(
-          _$FetchDataImpl value, $Res Function(_$FetchDataImpl) then) =
-      __$$FetchDataImplCopyWithImpl<$Res>;
+          _$FetchDataImpl<T> value, $Res Function(_$FetchDataImpl<T>) then) =
+      __$$FetchDataImplCopyWithImpl<T, $Res>;
   @override
   @useResult
   $Res call({String name, int pageKey});
 }
 
 /// @nodoc
-class __$$FetchDataImplCopyWithImpl<$Res>
-    extends _$SearchEventCopyWithImpl<$Res, _$FetchDataImpl>
-    implements _$$FetchDataImplCopyWith<$Res> {
+class __$$FetchDataImplCopyWithImpl<T, $Res>
+    extends _$SearchEventCopyWithImpl<T, $Res, _$FetchDataImpl<T>>
+    implements _$$FetchDataImplCopyWith<T, $Res> {
   __$$FetchDataImplCopyWithImpl(
-      _$FetchDataImpl _value, $Res Function(_$FetchDataImpl) _then)
+      _$FetchDataImpl<T> _value, $Res Function(_$FetchDataImpl<T>) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -1036,7 +1040,7 @@ class __$$FetchDataImplCopyWithImpl<$Res>
     Object? name = null,
     Object? pageKey = null,
   }) {
-    return _then(_$FetchDataImpl(
+    return _then(_$FetchDataImpl<T>(
       name: null == name
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
@@ -1051,7 +1055,7 @@ class __$$FetchDataImplCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$FetchDataImpl implements _FetchData {
+class _$FetchDataImpl<T> implements _FetchData<T> {
   const _$FetchDataImpl({required this.name, required this.pageKey});
 
   @override
@@ -1061,14 +1065,14 @@ class _$FetchDataImpl implements _FetchData {
 
   @override
   String toString() {
-    return 'SearchEvent.fetchData(name: $name, pageKey: $pageKey)';
+    return 'SearchEvent<$T>.fetchData(name: $name, pageKey: $pageKey)';
   }
 
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$FetchDataImpl &&
+            other is _$FetchDataImpl<T> &&
             (identical(other.name, name) || other.name == name) &&
             (identical(other.pageKey, pageKey) || other.pageKey == pageKey));
   }
@@ -1079,14 +1083,17 @@ class _$FetchDataImpl implements _FetchData {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$FetchDataImplCopyWith<_$FetchDataImpl> get copyWith =>
-      __$$FetchDataImplCopyWithImpl<_$FetchDataImpl>(this, _$identity);
+  _$$FetchDataImplCopyWith<T, _$FetchDataImpl<T>> get copyWith =>
+      __$$FetchDataImplCopyWithImpl<T, _$FetchDataImpl<T>>(this, _$identity);
 
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function(String name, int pageKey) fetchData,
     required TResult Function(String name, int pageKey) fetchDataFromNextPage,
+    required TResult Function(
+            String name, SearchFilterType searchType, List<T> data)
+        fetchDataFromLocal,
   }) {
     return fetchData(name, pageKey);
   }
@@ -1096,6 +1103,8 @@ class _$FetchDataImpl implements _FetchData {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function(String name, int pageKey)? fetchData,
     TResult? Function(String name, int pageKey)? fetchDataFromNextPage,
+    TResult? Function(String name, SearchFilterType searchType, List<T> data)?
+        fetchDataFromLocal,
   }) {
     return fetchData?.call(name, pageKey);
   }
@@ -1105,6 +1114,8 @@ class _$FetchDataImpl implements _FetchData {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(String name, int pageKey)? fetchData,
     TResult Function(String name, int pageKey)? fetchDataFromNextPage,
+    TResult Function(String name, SearchFilterType searchType, List<T> data)?
+        fetchDataFromLocal,
     required TResult orElse(),
   }) {
     if (fetchData != null) {
@@ -1116,9 +1127,10 @@ class _$FetchDataImpl implements _FetchData {
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
-    required TResult Function(_FetchData value) fetchData,
-    required TResult Function(_FetchDataFromNextPage value)
+    required TResult Function(_FetchData<T> value) fetchData,
+    required TResult Function(_FetchDataFromNextPage<T> value)
         fetchDataFromNextPage,
+    required TResult Function(_LocalSearch<T> value) fetchDataFromLocal,
   }) {
     return fetchData(this);
   }
@@ -1126,8 +1138,9 @@ class _$FetchDataImpl implements _FetchData {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(_FetchData value)? fetchData,
-    TResult? Function(_FetchDataFromNextPage value)? fetchDataFromNextPage,
+    TResult? Function(_FetchData<T> value)? fetchData,
+    TResult? Function(_FetchDataFromNextPage<T> value)? fetchDataFromNextPage,
+    TResult? Function(_LocalSearch<T> value)? fetchDataFromLocal,
   }) {
     return fetchData?.call(this);
   }
@@ -1135,8 +1148,9 @@ class _$FetchDataImpl implements _FetchData {
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
-    TResult Function(_FetchData value)? fetchData,
-    TResult Function(_FetchDataFromNextPage value)? fetchDataFromNextPage,
+    TResult Function(_FetchData<T> value)? fetchData,
+    TResult Function(_FetchDataFromNextPage<T> value)? fetchDataFromNextPage,
+    TResult Function(_LocalSearch<T> value)? fetchDataFromLocal,
     required TResult orElse(),
   }) {
     if (fetchData != null) {
@@ -1146,39 +1160,39 @@ class _$FetchDataImpl implements _FetchData {
   }
 }
 
-abstract class _FetchData implements SearchEvent {
+abstract class _FetchData<T> implements SearchEvent<T> {
   const factory _FetchData(
       {required final String name,
-      required final int pageKey}) = _$FetchDataImpl;
+      required final int pageKey}) = _$FetchDataImpl<T>;
 
   @override
   String get name;
-  @override
   int get pageKey;
   @override
   @JsonKey(ignore: true)
-  _$$FetchDataImplCopyWith<_$FetchDataImpl> get copyWith =>
+  _$$FetchDataImplCopyWith<T, _$FetchDataImpl<T>> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class _$$FetchDataFromNextPageImplCopyWith<$Res>
-    implements $SearchEventCopyWith<$Res> {
+abstract class _$$FetchDataFromNextPageImplCopyWith<T, $Res>
+    implements $SearchEventCopyWith<T, $Res> {
   factory _$$FetchDataFromNextPageImplCopyWith(
-          _$FetchDataFromNextPageImpl value,
-          $Res Function(_$FetchDataFromNextPageImpl) then) =
-      __$$FetchDataFromNextPageImplCopyWithImpl<$Res>;
+          _$FetchDataFromNextPageImpl<T> value,
+          $Res Function(_$FetchDataFromNextPageImpl<T>) then) =
+      __$$FetchDataFromNextPageImplCopyWithImpl<T, $Res>;
   @override
   @useResult
   $Res call({String name, int pageKey});
 }
 
 /// @nodoc
-class __$$FetchDataFromNextPageImplCopyWithImpl<$Res>
-    extends _$SearchEventCopyWithImpl<$Res, _$FetchDataFromNextPageImpl>
-    implements _$$FetchDataFromNextPageImplCopyWith<$Res> {
-  __$$FetchDataFromNextPageImplCopyWithImpl(_$FetchDataFromNextPageImpl _value,
-      $Res Function(_$FetchDataFromNextPageImpl) _then)
+class __$$FetchDataFromNextPageImplCopyWithImpl<T, $Res>
+    extends _$SearchEventCopyWithImpl<T, $Res, _$FetchDataFromNextPageImpl<T>>
+    implements _$$FetchDataFromNextPageImplCopyWith<T, $Res> {
+  __$$FetchDataFromNextPageImplCopyWithImpl(
+      _$FetchDataFromNextPageImpl<T> _value,
+      $Res Function(_$FetchDataFromNextPageImpl<T>) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -1187,7 +1201,7 @@ class __$$FetchDataFromNextPageImplCopyWithImpl<$Res>
     Object? name = null,
     Object? pageKey = null,
   }) {
-    return _then(_$FetchDataFromNextPageImpl(
+    return _then(_$FetchDataFromNextPageImpl<T>(
       name: null == name
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
@@ -1202,7 +1216,7 @@ class __$$FetchDataFromNextPageImplCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$FetchDataFromNextPageImpl implements _FetchDataFromNextPage {
+class _$FetchDataFromNextPageImpl<T> implements _FetchDataFromNextPage<T> {
   const _$FetchDataFromNextPageImpl(
       {required this.name, required this.pageKey});
 
@@ -1213,14 +1227,14 @@ class _$FetchDataFromNextPageImpl implements _FetchDataFromNextPage {
 
   @override
   String toString() {
-    return 'SearchEvent.fetchDataFromNextPage(name: $name, pageKey: $pageKey)';
+    return 'SearchEvent<$T>.fetchDataFromNextPage(name: $name, pageKey: $pageKey)';
   }
 
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$FetchDataFromNextPageImpl &&
+            other is _$FetchDataFromNextPageImpl<T> &&
             (identical(other.name, name) || other.name == name) &&
             (identical(other.pageKey, pageKey) || other.pageKey == pageKey));
   }
@@ -1231,15 +1245,18 @@ class _$FetchDataFromNextPageImpl implements _FetchDataFromNextPage {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$FetchDataFromNextPageImplCopyWith<_$FetchDataFromNextPageImpl>
-      get copyWith => __$$FetchDataFromNextPageImplCopyWithImpl<
-          _$FetchDataFromNextPageImpl>(this, _$identity);
+  _$$FetchDataFromNextPageImplCopyWith<T, _$FetchDataFromNextPageImpl<T>>
+      get copyWith => __$$FetchDataFromNextPageImplCopyWithImpl<T,
+          _$FetchDataFromNextPageImpl<T>>(this, _$identity);
 
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function(String name, int pageKey) fetchData,
     required TResult Function(String name, int pageKey) fetchDataFromNextPage,
+    required TResult Function(
+            String name, SearchFilterType searchType, List<T> data)
+        fetchDataFromLocal,
   }) {
     return fetchDataFromNextPage(name, pageKey);
   }
@@ -1249,6 +1266,8 @@ class _$FetchDataFromNextPageImpl implements _FetchDataFromNextPage {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function(String name, int pageKey)? fetchData,
     TResult? Function(String name, int pageKey)? fetchDataFromNextPage,
+    TResult? Function(String name, SearchFilterType searchType, List<T> data)?
+        fetchDataFromLocal,
   }) {
     return fetchDataFromNextPage?.call(name, pageKey);
   }
@@ -1258,6 +1277,8 @@ class _$FetchDataFromNextPageImpl implements _FetchDataFromNextPage {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(String name, int pageKey)? fetchData,
     TResult Function(String name, int pageKey)? fetchDataFromNextPage,
+    TResult Function(String name, SearchFilterType searchType, List<T> data)?
+        fetchDataFromLocal,
     required TResult orElse(),
   }) {
     if (fetchDataFromNextPage != null) {
@@ -1269,9 +1290,10 @@ class _$FetchDataFromNextPageImpl implements _FetchDataFromNextPage {
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
-    required TResult Function(_FetchData value) fetchData,
-    required TResult Function(_FetchDataFromNextPage value)
+    required TResult Function(_FetchData<T> value) fetchData,
+    required TResult Function(_FetchDataFromNextPage<T> value)
         fetchDataFromNextPage,
+    required TResult Function(_LocalSearch<T> value) fetchDataFromLocal,
   }) {
     return fetchDataFromNextPage(this);
   }
@@ -1279,8 +1301,9 @@ class _$FetchDataFromNextPageImpl implements _FetchDataFromNextPage {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(_FetchData value)? fetchData,
-    TResult? Function(_FetchDataFromNextPage value)? fetchDataFromNextPage,
+    TResult? Function(_FetchData<T> value)? fetchData,
+    TResult? Function(_FetchDataFromNextPage<T> value)? fetchDataFromNextPage,
+    TResult? Function(_LocalSearch<T> value)? fetchDataFromLocal,
   }) {
     return fetchDataFromNextPage?.call(this);
   }
@@ -1288,8 +1311,9 @@ class _$FetchDataFromNextPageImpl implements _FetchDataFromNextPage {
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
-    TResult Function(_FetchData value)? fetchData,
-    TResult Function(_FetchDataFromNextPage value)? fetchDataFromNextPage,
+    TResult Function(_FetchData<T> value)? fetchData,
+    TResult Function(_FetchDataFromNextPage<T> value)? fetchDataFromNextPage,
+    TResult Function(_LocalSearch<T> value)? fetchDataFromLocal,
     required TResult orElse(),
   }) {
     if (fetchDataFromNextPage != null) {
@@ -1299,17 +1323,197 @@ class _$FetchDataFromNextPageImpl implements _FetchDataFromNextPage {
   }
 }
 
-abstract class _FetchDataFromNextPage implements SearchEvent {
+abstract class _FetchDataFromNextPage<T> implements SearchEvent<T> {
   const factory _FetchDataFromNextPage(
       {required final String name,
-      required final int pageKey}) = _$FetchDataFromNextPageImpl;
+      required final int pageKey}) = _$FetchDataFromNextPageImpl<T>;
 
   @override
   String get name;
-  @override
   int get pageKey;
   @override
   @JsonKey(ignore: true)
-  _$$FetchDataFromNextPageImplCopyWith<_$FetchDataFromNextPageImpl>
+  _$$FetchDataFromNextPageImplCopyWith<T, _$FetchDataFromNextPageImpl<T>>
       get copyWith => throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class _$$LocalSearchImplCopyWith<T, $Res>
+    implements $SearchEventCopyWith<T, $Res> {
+  factory _$$LocalSearchImplCopyWith(_$LocalSearchImpl<T> value,
+          $Res Function(_$LocalSearchImpl<T>) then) =
+      __$$LocalSearchImplCopyWithImpl<T, $Res>;
+  @override
+  @useResult
+  $Res call({String name, SearchFilterType searchType, List<T> data});
+}
+
+/// @nodoc
+class __$$LocalSearchImplCopyWithImpl<T, $Res>
+    extends _$SearchEventCopyWithImpl<T, $Res, _$LocalSearchImpl<T>>
+    implements _$$LocalSearchImplCopyWith<T, $Res> {
+  __$$LocalSearchImplCopyWithImpl(
+      _$LocalSearchImpl<T> _value, $Res Function(_$LocalSearchImpl<T>) _then)
+      : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? name = null,
+    Object? searchType = null,
+    Object? data = null,
+  }) {
+    return _then(_$LocalSearchImpl<T>(
+      name: null == name
+          ? _value.name
+          : name // ignore: cast_nullable_to_non_nullable
+              as String,
+      searchType: null == searchType
+          ? _value.searchType
+          : searchType // ignore: cast_nullable_to_non_nullable
+              as SearchFilterType,
+      data: null == data
+          ? _value._data
+          : data // ignore: cast_nullable_to_non_nullable
+              as List<T>,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$LocalSearchImpl<T> implements _LocalSearch<T> {
+  const _$LocalSearchImpl(
+      {required this.name,
+      required this.searchType,
+      required final List<T> data})
+      : _data = data;
+
+  @override
+  final String name;
+  @override
+  final SearchFilterType searchType;
+  final List<T> _data;
+  @override
+  List<T> get data {
+    if (_data is EqualUnmodifiableListView) return _data;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_data);
+  }
+
+  @override
+  String toString() {
+    return 'SearchEvent<$T>.fetchDataFromLocal(name: $name, searchType: $searchType, data: $data)';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$LocalSearchImpl<T> &&
+            (identical(other.name, name) || other.name == name) &&
+            (identical(other.searchType, searchType) ||
+                other.searchType == searchType) &&
+            const DeepCollectionEquality().equals(other._data, _data));
+  }
+
+  @override
+  int get hashCode => Object.hash(runtimeType, name, searchType,
+      const DeepCollectionEquality().hash(_data));
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$LocalSearchImplCopyWith<T, _$LocalSearchImpl<T>> get copyWith =>
+      __$$LocalSearchImplCopyWithImpl<T, _$LocalSearchImpl<T>>(
+          this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function(String name, int pageKey) fetchData,
+    required TResult Function(String name, int pageKey) fetchDataFromNextPage,
+    required TResult Function(
+            String name, SearchFilterType searchType, List<T> data)
+        fetchDataFromLocal,
+  }) {
+    return fetchDataFromLocal(name, searchType, data);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function(String name, int pageKey)? fetchData,
+    TResult? Function(String name, int pageKey)? fetchDataFromNextPage,
+    TResult? Function(String name, SearchFilterType searchType, List<T> data)?
+        fetchDataFromLocal,
+  }) {
+    return fetchDataFromLocal?.call(name, searchType, data);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function(String name, int pageKey)? fetchData,
+    TResult Function(String name, int pageKey)? fetchDataFromNextPage,
+    TResult Function(String name, SearchFilterType searchType, List<T> data)?
+        fetchDataFromLocal,
+    required TResult orElse(),
+  }) {
+    if (fetchDataFromLocal != null) {
+      return fetchDataFromLocal(name, searchType, data);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_FetchData<T> value) fetchData,
+    required TResult Function(_FetchDataFromNextPage<T> value)
+        fetchDataFromNextPage,
+    required TResult Function(_LocalSearch<T> value) fetchDataFromLocal,
+  }) {
+    return fetchDataFromLocal(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_FetchData<T> value)? fetchData,
+    TResult? Function(_FetchDataFromNextPage<T> value)? fetchDataFromNextPage,
+    TResult? Function(_LocalSearch<T> value)? fetchDataFromLocal,
+  }) {
+    return fetchDataFromLocal?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_FetchData<T> value)? fetchData,
+    TResult Function(_FetchDataFromNextPage<T> value)? fetchDataFromNextPage,
+    TResult Function(_LocalSearch<T> value)? fetchDataFromLocal,
+    required TResult orElse(),
+  }) {
+    if (fetchDataFromLocal != null) {
+      return fetchDataFromLocal(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _LocalSearch<T> implements SearchEvent<T> {
+  const factory _LocalSearch(
+      {required final String name,
+      required final SearchFilterType searchType,
+      required final List<T> data}) = _$LocalSearchImpl<T>;
+
+  @override
+  String get name;
+  SearchFilterType get searchType;
+  List<T> get data;
+  @override
+  @JsonKey(ignore: true)
+  _$$LocalSearchImplCopyWith<T, _$LocalSearchImpl<T>> get copyWith =>
+      throw _privateConstructorUsedError;
 }

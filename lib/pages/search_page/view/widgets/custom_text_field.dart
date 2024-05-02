@@ -1,10 +1,13 @@
-part of '../search_page.dart';
+import 'package:flutter/material.dart';
+import 'package:movie_app/utils/themes/color_constants.dart';
 
 class CustomSearchFieldWidget extends StatelessWidget {
   final TextEditingController searchController;
+  final Function(String?) onSubmit;
   const CustomSearchFieldWidget({
     super.key,
     required this.searchController,
+    required this.onSubmit,
   });
 
   @override
@@ -40,21 +43,7 @@ class CustomSearchFieldWidget extends StatelessWidget {
           fontWeight: FontWeight.w400,
         ),
       ),
-      onSubmitted: (value) {
-        if (value.isNotEmpty) {
-          context.read<SearchBloc>().add(
-                SearchEvent.fetchData(
-                  name: value,
-                  pageKey: 1,
-                ),
-              );
-        } else {
-          Utilities.showSnackBar(
-            context: context,
-            message: "Please enter a movie name first",
-          );
-        }
-      },
+      onSubmitted: onSubmit,
     );
   }
 }

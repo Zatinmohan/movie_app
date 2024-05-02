@@ -40,3 +40,5 @@ extension XNowPlayingResultModel on NowPlayingResultModel {
         voteCount: voteCount,
       );
 }
+
+

@@ -65,6 +65,8 @@ class TopMoviesBloc extends Bloc<TopMoviesEvents, TopMoviesStates> {
     }
   }
 
+  List<TopMoviesResultEntity> get loadedList => _originalData;
+
   @override
   Future<void> close() {
     Logs.debugLog("$_logName Dispose");

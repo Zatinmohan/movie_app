@@ -67,6 +67,8 @@ class NowPlayingBloc
     }
   }
 
+  List<NowPlayingResultEntity> get loadedList => _originalList;
+
   @override
   Future<void> close() {
     Logs.debugLog("$_logName Dispose");

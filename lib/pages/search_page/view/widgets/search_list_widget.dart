@@ -1,4 +1,9 @@
-part of '../search_page.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:movie_app/pages/search_page/domain/entities/search_result_entity.dart';
+import 'package:movie_app/pages/search_page/view/states/api_search_bloc/search_bloc.dart';
+import 'package:movie_app/services/api/constants/api_constants.dart';
+import 'package:movie_app/utils/utilities.dart';
 
 class SearchListWidget extends StatefulWidget {
   final String searchedItem;

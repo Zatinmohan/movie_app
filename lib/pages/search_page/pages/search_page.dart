@@ -1,15 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get_it/get_it.dart';
-import 'package:movie_app/pages/search_page/domain/entities/search_result_entity.dart';
 import 'package:movie_app/pages/search_page/search_page_dependency_injection.dart';
-import 'package:movie_app/pages/search_page/view/states/search_bloc.dart';
-import 'package:movie_app/services/api/constants/api_constants.dart';
+import 'package:movie_app/pages/search_page/view/states/api_search_bloc/search_bloc.dart';
+import 'package:movie_app/pages/search_page/view/widgets/custom_text_field.dart';
+import 'package:movie_app/pages/search_page/view/widgets/search_list_widget.dart';
 import 'package:movie_app/utils/themes/color_constants.dart';
-import 'package:movie_app/utils/utilities.dart';
-
-part 'widgets/search_list_widget.dart';
-part 'widgets/custom_text_field.dart';
 
 class SearchPage extends StatefulWidget {
   const SearchPage({super.key});
@@ -79,6 +75,14 @@ class _SearchPageState extends State<SearchPage> {
                           alignment: Alignment.center,
                           child: CustomSearchFieldWidget(
                             searchController: searchTextController,
+                            onSubmit: (value) {
+                              context.read<SearchBloc>().add(
+                                    SearchEvent.fetchData(
+                                      name: searchTextController.text,
+                                      pageKey: 1,
+                                    ),
+                                  );
+                            },
                           ),
                         ),
                       ),
